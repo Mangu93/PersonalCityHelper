@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Personal City Helper</string>
+    <string name="app_name" translatable="false">Personal City Helper</string>
     <string name="news">News</string>
     <string name="beach">Beach</string>
     <string name="weather">Weather</string>
@@ -17,4 +17,5 @@
     <string name="day">Day</string>
     <string name="sky">Sky conditions</string>
     <string name="morning">Morning</string>
+    <string name="change_language">Change language</string>
 </resources>

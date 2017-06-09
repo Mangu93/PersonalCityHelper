@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="news">Noticias</string>
+    <string name="beach">Playa</string>
+    <string name="weather">Tiempo</string>
+    <string name="calendar">Eventos</string>
+    <string name="uvMax">UV máximo</string>
+    <string name="wind">Viento</string>
+    <string name="waterTemp">Temperatura del agua</string>
+    <string name="maxTemp">Máxima temperatura</string>
+    <string name="afternoon">Tarde</string>
+    <string name="thermalSens">Sensación térmica</string>
+    <string name="beaches">Estado de las playas</string>
+    <string name="prediction">Predicción</string>
+    <string name="swell">Oleaje</string>
+    <string name="tomorrow">Mañana</string>
+    <string name="day">Día</string>
+    <string name="sky">Estado del cielo</string>
+    <string name="morning">Mañana</string>
+    <string name="change_language">Cambiar idioma</string>
+</resources>
