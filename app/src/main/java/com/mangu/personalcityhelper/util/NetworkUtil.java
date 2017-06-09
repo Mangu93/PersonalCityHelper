@@ -14,6 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import retrofit2.HttpException;
+import timber.log.Timber;
 
 public class NetworkUtil {
     public static boolean isHttpStatusCode(Throwable throwable, int statusCode) {
@@ -44,7 +45,7 @@ public class NetworkUtil {
         }
     }
 
-    public static String getURLContent(String p_sURL) {
+    public static String getURLContent(String url) {
         URL oURL;
         URLConnection oConnection;
         BufferedReader oReader;
@@ -53,9 +54,10 @@ public class NetworkUtil {
         String sResponse = null;
 
         try {
-            oURL = new URL(p_sURL);
+            oURL = new URL(url);
             oConnection = oURL.openConnection();
-            oReader = new BufferedReader(new InputStreamReader(oConnection.getInputStream(), "ISO_8859_1"));
+            oReader = new BufferedReader(
+                    new InputStreamReader(oConnection.getInputStream(), "ISO_8859_1"));
             sbResponse = new StringBuilder();
 
             while ((sLine = oReader.readLine()) != null) {
@@ -64,7 +66,7 @@ public class NetworkUtil {
 
             sResponse = sbResponse.toString();
         } catch (Exception e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
 
         return sResponse;

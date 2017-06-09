@@ -9,7 +9,7 @@ public class BeachPrediction {
     private String mWindAfternoon;
     private String mSurfMorning;
     private String mSurfAfternoon;
-    private int mMaximumUv;//10 es muy alto
+    private int mMaximumUv;
     private int mWaterTemperature;
     private int mMaximumTemperature;
     private String mDay;
@@ -49,9 +49,9 @@ public class BeachPrediction {
                 + mSensation + ": " + getmTermicSensation() + ".<br>"
                 + mUvMax + ": " + getmMaximumUv() + ".<br>"
                 + mSurf + ": " + mMorning + " -> " + getmSurfMorning() + " , " + mAfternoon
-                                                + " -> " + getmSurfAfternoon() + ".<br>"
+                + " -> " + getmSurfAfternoon() + ".<br>"
                 + mWind + ": " + mMorning + " -> " + getmWindMorning() + ", " + mAfternoon + " "
-                                            + getmWindAfternoon() + ".<br>";
+                + " -> " + getmWindAfternoon() + ".<br>";
     }
 
     private String getmDate() {
@@ -166,7 +166,8 @@ public class BeachPrediction {
                 this.mWindMorning = "Moderate";
             }
         } else {
-            this.mWindMorning = (mWindMorning.substring(0, 1).toUpperCase()) + (mWindMorning.substring(1));
+            this.mWindMorning = (mWindMorning.substring(0, 1).toUpperCase()) +
+                    (mWindMorning.substring(1));
         }
     }
 
@@ -182,7 +183,8 @@ public class BeachPrediction {
                 this.mWindAfternoon = "Moderate";
             }
         } else {
-            this.mWindAfternoon = mWindAfternoon.substring(0, 1).toUpperCase() + (mWindAfternoon.substring(1));
+            this.mWindAfternoon = mWindAfternoon.substring(0, 1).toUpperCase() +
+                    (mWindAfternoon.substring(1));
         }
     }
 

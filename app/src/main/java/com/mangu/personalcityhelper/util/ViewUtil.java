@@ -39,6 +39,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.CropSquareTransformation;
 
 import static com.mangu.personalcityhelper.data.model.BeachPredictionUtil.preparePrediction;
@@ -146,14 +147,16 @@ public class ViewUtil {
             @Override
             public void onPageFinished(WebView view, String url) {
                 webView.loadUrl("javascript:(function() { " +
-                        "var target = document.getElementsByClassName('rincondelavictoria-_basico-index-twml')[0];" +
+                        "var target = document.getElementsByClassName('" +
+                        "rincondelavictoria-_basico-index-twml')[0];" +
                         "var target_offset = target.offsetTop;" +
                         "$('html,body').animate({scrollTop: target_offset}, 1000);" +
                         "})()");
             }
 
             @Override
-            public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+            public WebResourceResponse shouldInterceptRequest(WebView view,
+                                                              WebResourceRequest request) {
                 return super.shouldInterceptRequest(view, request);
             }
 

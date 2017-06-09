@@ -16,7 +16,7 @@ import javax.inject.Inject;
 import timber.log.Timber;
 
 public class NewsAsyncTaskLoader extends AsyncTaskLoader<Document> {
-    private static int count = 1;
+    private int mCount = 1;
     @Inject
     NewsMvpView mvpView;
     @Inject
@@ -43,7 +43,7 @@ public class NewsAsyncTaskLoader extends AsyncTaskLoader<Document> {
         But idk.
      */
     public void rollbackOnStop() {
-        count = 1;
+        mCount = 1;
         mHtmlDocument = null;
     }
 
@@ -65,9 +65,9 @@ public class NewsAsyncTaskLoader extends AsyncTaskLoader<Document> {
     @Override
     public Document loadInBackground() {
         try {
-            String newsUrl = mBaseNewsUrl + count;
+            String newsUrl = mBaseNewsUrl + mCount;
             Document document = Jsoup.connect(newsUrl).get();
-            count = count + 1;
+            mCount = mCount + 1;
             return document;
         } catch (IOException e) {
             if (mvpView != null) {

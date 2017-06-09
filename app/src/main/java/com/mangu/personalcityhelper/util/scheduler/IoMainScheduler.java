@@ -9,7 +9,8 @@ import rx.Observable;
 /**
  * Created by lam on 2/6/17.
  */
-public class IoMainScheduler<T> extends BaseScheduler<T> implements Observable.Transformer<String, R> {
+public class IoMainScheduler<T> extends BaseScheduler<T>
+        implements Observable.Transformer<String, R> {
 
     public IoMainScheduler() {
         super(Schedulers.io(), AndroidSchedulers.mainThread());

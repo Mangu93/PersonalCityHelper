@@ -4,7 +4,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class BeachPredictionUtil {
-    public static BeachPrediction preparePrediction(JSONObject jsonObject, BeachPrediction prediction)
+    public static BeachPrediction preparePrediction(JSONObject jsonObject,
+                                                    BeachPrediction prediction)
             throws JSONException {
         String maxim = jsonObject.getJSONObject("t_maxima").toString().split("\\:")[1].
                 replace("}", "");

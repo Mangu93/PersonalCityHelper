@@ -26,7 +26,8 @@ import butterknife.BindView;
 import static com.mangu.personalcityhelper.util.ViewUtil.createErrorSnackbar;
 
 public class EventsActivity extends BaseActivity
-        implements EventsMvpView, ErrorView.ErrorListener, ScrollViewListener, LoaderCallbacks<Document> {
+        implements EventsMvpView, ErrorView.ErrorListener, ScrollViewListener,
+        LoaderCallbacks<Document> {
 
     private static final int LOADER_ID = 201;
     @Inject

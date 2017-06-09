@@ -27,9 +27,9 @@ import timber.log.Timber;
 
 import static com.mangu.personalcityhelper.util.ViewUtil.createErrorSnackbar;
 
-public class BeachActivity extends BaseActivity implements BeachMvpView, ErrorView.ErrorListener, LoaderCallbacks<JSONObject> {
+public class BeachActivity extends BaseActivity implements
+        BeachMvpView, ErrorView.ErrorListener, LoaderCallbacks<JSONObject> {
     private static final int LOADER_ID = 202;
-    private final String XML_URL = "http://www.aemet.es/xml/playas/play_v2_2908202.xml";
     @Inject
     BeachPresenter mBeachPresenter;
     @BindView(R.id.view_error)
