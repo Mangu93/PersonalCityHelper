@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Personal City Helper</string>
+    <string name="news">News</string>
+    <string name="beach">Beach</string>
+    <string name="weather">Weather</string>
+    <string name="calendar">Events</string>
+    <string name="uvMax">UV maximum</string>
+    <string name="wind">Wind</string>
+    <string name="waterTemp">Water temperature</string>
+    <string name="maxTemp">Máximum temperature</string>
+    <string name="afternoon">Afternoon</string>
+    <string name="thermalSens">Thermal sensation</string>
+    <string name="beaches">State of the beaches</string>
+    <string name="prediction">Prediction</string>
+    <string name="swell">Swell</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="day">Day</string>
+    <string name="sky">Sky conditions</string>
+    <string name="morning">Morning</string>
+</resources>

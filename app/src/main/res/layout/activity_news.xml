@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mangu.personalcityhelper.ui.news.NewsActivity">
+
+    <com.mangu.personalcityhelper.ui.common.ErrorView
+        android:id="@+id/view_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:layout_centerInParent="true"
+        android:translationZ="2dp"
+        android:visibility="gone" />
+
+    <com.mangu.personalcityhelper.ui.common.ScrollViewExt
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/scrollView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/news_layout"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingEnd="5dp"
+            android:paddingStart="0dp"
+            />
+    </com.mangu.personalcityhelper.ui.common.ScrollViewExt>
+
+
+</RelativeLayout>
