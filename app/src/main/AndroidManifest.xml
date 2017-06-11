@@ -4,11 +4,10 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
-
         android:name=".StarterApp"
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -22,10 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".ui.news.NewsActivity" />
         <activity android:name=".ui.events.EventsActivity" />
-        <activity android:name=".ui.beach.BeachActivity"/>
+        <activity android:name=".ui.beach.BeachActivity" />
+        <activity android:name=".ui.weather.WeatherActivity"/>
     </application>
 
 </manifest>

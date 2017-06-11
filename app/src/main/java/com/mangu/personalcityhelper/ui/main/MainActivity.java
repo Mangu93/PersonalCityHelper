@@ -16,6 +16,7 @@ import com.mangu.personalcityhelper.ui.beach.BeachActivity;
 import com.mangu.personalcityhelper.ui.common.ErrorView;
 import com.mangu.personalcityhelper.ui.events.EventsActivity;
 import com.mangu.personalcityhelper.ui.news.NewsActivity;
+import com.mangu.personalcityhelper.ui.weather.WeatherActivity;
 
 import java.util.Locale;
 
@@ -77,6 +78,7 @@ public class MainActivity extends BaseActivity implements MainMvpView, ErrorView
                 startActivity(new Intent(this, NewsActivity.class));
                 break;
             case R.id.id_weather:
+                startActivity(new Intent(this, WeatherActivity.class));
                 break;
             case R.id.id_events:
                 startActivity(new Intent(this, EventsActivity.class));
