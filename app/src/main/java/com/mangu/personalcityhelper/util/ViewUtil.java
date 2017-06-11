@@ -29,6 +29,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.mangu.personalcityhelper.R;
 import com.mangu.personalcityhelper.data.model.BeachPrediction;
+import com.mangu.personalcityhelper.data.model.BeachPredictionUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -190,10 +191,25 @@ public class ViewUtil {
         @SuppressLint("InflateParams") View view = ((Activity) context).getLayoutInflater().
                 inflate(R.layout.view_beach, null);
         final TextView textView = (TextView) view.findViewById(R.id.tv_beach);
+        final ImageView imageView = (ImageView) view.findViewById(R.id.beach_icon);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             textView.setText(Html.fromHtml(prediction.presentation(), Html.FROM_HTML_MODE_LEGACY));
         } else {
             textView.setText(Html.fromHtml(prediction.presentation()));
+        }
+        try {
+            Glide.with(context)
+                    .load(Integer.parseInt(
+                            BeachPredictionUtil.getIconPrediction(prediction)))
+                    .bitmapTransform(new CropCircleTransformation(context))
+                    .placeholder(R.drawable.ic_sunny)
+                    .into(imageView);
+        } catch (NumberFormatException ex) {
+            Glide.with(context)
+                    .load(BeachPredictionUtil.getIconPrediction(prediction))
+                    .bitmapTransform(new CropCircleTransformation(context))
+                    .placeholder(R.drawable.ic_sunny)
+                    .into(imageView);
         }
         return view;
     }

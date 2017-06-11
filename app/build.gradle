@@ -2,6 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply from: '../config/quality/quality.gradle'
 android {
+    if (project.hasProperty('devBuild')){
+        aaptOptions.cruncherEnabled = false
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     compileOptions {

@@ -107,6 +107,14 @@ public class BeachPrediction {
         }
     }
 
+    public String getmSky() {
+        return mSky;
+    }
+
+    public void setmSky(String mSky) {
+        this.mSky = mSky;
+    }
+
     private String getmTermicSensation() {
         return mTermicSensation;
     }
