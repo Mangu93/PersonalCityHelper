@@ -23,13 +23,13 @@ public class NetworkUtil {
     }
 
     public static boolean isNetworkConnected(Context context) {
-        ConnectivityManager cm =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) context.getApplicationContext()
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 
-    public static String extractImgUrl(String imgUrl) {
+    static String extractImgUrl(String imgUrl) {
         Pattern pattern = Pattern.compile("http(s?):\\/{2}(www)?(.)*\\.(jpeg|png|jpg)",
                 Pattern.CASE_INSENSITIVE);
         Matcher urlMatcher = pattern.matcher(imgUrl);
