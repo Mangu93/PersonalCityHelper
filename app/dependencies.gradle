@@ -44,8 +44,8 @@ ext {
     ]
 
     googlePlay = [
-            maps             : "com.google.android.gms:play-services-maps:$versions.firebase",
-            crash            : "com.google.firebase:firebase-crash:$versions.firebase"
+            maps : "com.google.android.gms:play-services-maps:$versions.firebase",
+            crash: "com.google.firebase:firebase-crash:$versions.firebase"
     ]
     unitTest = [
             harcrestCore        : "org.hamcrest:hamcrest-core:$versions.hamcrest",
