@@ -197,6 +197,9 @@ public class ViewUtil {
         } else {
             textView.setText(Html.fromHtml(prediction.presentation()));
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            imageView.setElevation(3f);
+        }
         try {
             Glide.with(context)
                     .load(Integer.parseInt(
