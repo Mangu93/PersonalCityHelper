@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.mangu.personalcityhelper.data.DataManager;
-import com.mangu.personalcityhelper.data.remote.StarterService;
+import com.mangu.personalcityhelper.data.remote.WeatherService;
 import com.mangu.personalcityhelper.inyection.AppContext;
 import com.mangu.personalcityhelper.inyection.modules.AppModule;
 
@@ -23,6 +23,6 @@ public interface AppComponent {
 
     DataManager dataManager();
 
-    StarterService starterService();
+    WeatherService starterService();
 
 }
