@@ -7,31 +7,36 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mangu.personalcityhelper.BuildConfig;
 
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import timber.log.Timber;
 
-public class StarterServiceFactory {
+import static com.mangu.personalcityhelper.BuildConfig.OpenWeatherApiToken;
 
-    public static StarterService makeStarterService() {
+public class WeatherServiceFactory {
+    private static final String BASE_URL = "http://api.openweathermap.org/data/2.5/";
+
+    public static WeatherService makeStarterService() {
         return makeStarterService(makeGson());
     }
 
-    private static StarterService makeStarterService(Gson gson) {
+    private static WeatherService makeStarterService(Gson gson) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BuildConfig.API_TEST)
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(makeOkHttpClient())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-        return retrofit.create(StarterService.class);
+        return retrofit.create(WeatherService.class);
     }
 
     @NonNull
-    public static OkHttpClient makeOkHttpClient() {
+    private static OkHttpClient makeOkHttpClient() {
         OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
 
         if (BuildConfig.DEBUG) {
@@ -39,6 +44,14 @@ public class StarterServiceFactory {
                     -> Timber.d(message));
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             httpClientBuilder.addInterceptor(loggingInterceptor);
+            httpClientBuilder.addInterceptor(chain -> {
+                Request request = chain.request();
+                HttpUrl originalHttpUrl = request.url();
+                HttpUrl httpUrl = originalHttpUrl.newBuilder()
+                        .addQueryParameter("appid", OpenWeatherApiToken).build();
+                Request.Builder requestBuilder = request.newBuilder().url(httpUrl);
+                return chain.proceed(requestBuilder.build());
+            });
         }
 
         return httpClientBuilder.build();
