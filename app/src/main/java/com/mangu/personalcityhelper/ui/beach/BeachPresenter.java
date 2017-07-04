@@ -31,7 +31,7 @@ public class BeachPresenter extends BasePresenter<BeachMvpView> {
         super.attachView(mvpView);
     }
 
-    public void showWeather(Context context, JSONObject jsonObject) throws JSONException {
+    void showWeather(Context context, JSONObject jsonObject) throws JSONException {
         checkViewAttached();
         getMvpView().showProgress(true);
         JSONArray daysArray = jsonObject.getJSONObject("playa").getJSONObject("prediccion")

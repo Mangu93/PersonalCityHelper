@@ -43,7 +43,7 @@ public class BeachPrediction {
     }
 
     public String presentation() {
-        return mDay + " : " + getmDate() + ".<br>"
+        return mDay + getmDate() + ".<br>"
                 + mMaxim + ": " + getmMaximumTemperature() + "º" + ".<br>"
                 + mWater + ": " + getmWaterTemperature() + "º" + ".<br>"
                 + mSensation + ": " + getmTermicSensation() + ".<br>"

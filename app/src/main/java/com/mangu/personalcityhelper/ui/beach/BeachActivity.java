@@ -90,6 +90,7 @@ public class BeachActivity extends BaseActivity implements
             mLinearLayout.addView(view);
             showProgress(false);
         }
+        mLinearLayout.getBackground().setAlpha(80);
     }
 
 
