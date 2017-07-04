@@ -30,7 +30,7 @@ public class NewsPresenter extends BasePresenter<NewsMvpView> {
         super.attachView(mvpView);
     }
 
-    public void showNews(Document document, Context context) {
+    void showNews(Document document, Context context) {
         checkViewAttached();
         getMvpView().showProgress(true);
         List<LinearLayout> layoutList = processDocumentIntoLayout(context, document);

@@ -116,7 +116,7 @@ public class NewsActivity extends BaseActivity implements
 
     @Override
     public void onScrollChanged(ScrollViewExt scrollView, int x, int y, int oldx, int oldy) {
-        View view = (View) scrollView.getChildAt(scrollView.getChildCount() - 1);
+        View view = scrollView.getChildAt(scrollView.getChildCount() - 1);
         int diff = (view.getBottom() - (scrollView.getHeight() + scrollView.getScrollY()));
         if (diff == 0) {
             getSupportLoaderManager().restartLoader(LOADER_ID, null, this);

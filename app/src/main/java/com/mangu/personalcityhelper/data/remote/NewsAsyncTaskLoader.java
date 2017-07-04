@@ -16,11 +16,11 @@ import javax.inject.Inject;
 import timber.log.Timber;
 
 public class NewsAsyncTaskLoader extends AsyncTaskLoader<Document> {
+    private static int mCount = 1;
     @Inject
     NewsMvpView mvpView;
     @Inject
     EventsMvpView eventsMvpView;
-    private int mCount = 1;
     private String mBaseNewsUrl = "http://www.rincondelavictoria.es/noticias/page/";
     private Context mContext;
     private Document mHtmlDocument;
