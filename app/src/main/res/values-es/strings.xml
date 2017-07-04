@@ -7,16 +7,20 @@
     <string name="uvMax">UV máximo</string>
     <string name="wind">Viento</string>
     <string name="waterTemp">Temperatura del agua</string>
-    <string name="maxTemp">Máxima temperatura</string>
+    <string name="maxTemp">Temperatura máxima</string>
     <string name="afternoon">Tarde</string>
     <string name="thermalSens">Sensación térmica</string>
     <string name="beaches">Estado de las playas</string>
     <string name="prediction">Predicción</string>
     <string name="swell">Oleaje</string>
     <string name="tomorrow">Mañana</string>
-    <string name="day">Día</string>
+    <string name="day">"Día: "</string>
     <string name="sky">Estado del cielo</string>
     <string name="morning">Mañana</string>
     <string name="change_language">Cambiar idioma</string>
     <string name="beach_icon">Beach icon</string>
+    <string name="Pressure">Presión:</string>
+    <string name="humidity">"Humedad: "</string>
+    <string name="minimum_and_maximum">"Min y max: "</string>
+    <string name="temperature">Temperatura:</string>
 </resources>

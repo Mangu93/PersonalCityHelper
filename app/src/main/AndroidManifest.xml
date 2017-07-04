@@ -24,7 +24,8 @@
         <activity android:name=".ui.news.NewsActivity" />
         <activity android:name=".ui.events.EventsActivity" />
         <activity android:name=".ui.beach.BeachActivity" />
-        <activity android:name=".ui.weather.WeatherActivity"/>
+        <activity android:name=".ui.weather.WeatherActivity" />
+        <activity android:name=".ui.transport.TransportActivity"></activity>
     </application>
 
 </manifest>

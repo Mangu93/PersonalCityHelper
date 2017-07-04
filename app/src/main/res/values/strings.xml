@@ -13,10 +13,15 @@
     <string name="beaches">State of the beaches</string>
     <string name="prediction">Prediction</string>
     <string name="swell">Swell</string>
-    <string name="tomorrow">Tomorrow</string>
-    <string name="day">Day</string>
+    <string name="tomorrow">Morning</string>
+    <string name="day">Day: </string>
     <string name="sky">Sky conditions</string>
     <string name="morning">Morning</string>
     <string name="change_language">Change language</string>
     <string name="beach_icon">Beach icon</string>
+    <string name="temperature">Temperature: </string>
+    <string name="Pressure">Pressure: </string>
+    <string name="humidity">Humidity: </string>
+    <string name="minimum_and_maximum">Min and max: </string>
+    <string name="transport">Transport</string>
 </resources>
