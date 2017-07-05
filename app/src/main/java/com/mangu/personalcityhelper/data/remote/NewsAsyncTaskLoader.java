@@ -42,9 +42,9 @@ public class NewsAsyncTaskLoader extends AsyncTaskLoader<Document> {
         I mean, I'm sure I should not be doing something like this
         But idk.
      */
-    public void rollbackOnStop() {
-        mCount = 1;
-        mHtmlDocument = null;
+    public static void rollbackOnStop() {
+        NewsAsyncTaskLoader.mCount = 1;
+        //mHtmlDocument = null;
     }
 
     @Override

@@ -22,15 +22,14 @@ import static com.mangu.personalcityhelper.util.StringUtil.formatTimestamp;
 import static com.mangu.personalcityhelper.util.StringUtil.getMinAndMax;
 import static com.mangu.personalcityhelper.util.StringUtil.kelvinToCelsius;
 
-public class WeatherCardAdapter extends RecyclerView.Adapter<WeatherCardAdapter.ViewHolder> implements View.OnClickListener {
-    private static String BASE_PIC_URL = "http://openweathermap.org/img/w/";
+public class WeatherCardAdapter extends
+        RecyclerView.Adapter<WeatherCardAdapter.ViewHolder> implements View.OnClickListener {
+    private static final String BASE_PIC_URL = "http://openweathermap.org/img/w/";
 
     private Context mContext;
-    private List<Integer> mDaysList;
 
     public WeatherCardAdapter(Context context) {
         this.mContext = context;
-        mDaysList = new ArrayList<>();
     }
 
     public List<JsonObject> getJson() {

@@ -24,7 +24,7 @@ import static com.mangu.personalcityhelper.util.StringUtil.kelvinToCelsius;
 
 public class WeatherForecastAdapter extends RecyclerView.Adapter<WeatherForecastAdapter.ViewHolder>
         implements View.OnClickListener {
-    private static String BASE_PIC_URL = "http://openweathermap.org/img/w/";
+    private static final String BASE_PIC_URL = "http://openweathermap.org/img/w/";
 
     private Context mContext;
     private List<Integer> mDaysList;

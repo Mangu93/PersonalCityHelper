@@ -111,7 +111,7 @@ public class NewsActivity extends BaseActivity implements
 
     @Override
     public void onLoaderReset(Loader<Document> loader) {
-        ((NewsAsyncTaskLoader) loader).rollbackOnStop();
+        NewsAsyncTaskLoader.rollbackOnStop();
     }
 
     @Override

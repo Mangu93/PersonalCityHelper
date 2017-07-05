@@ -117,7 +117,7 @@ public class EventsActivity extends BaseActivity
 
     @Override
     public void onLoaderReset(Loader<Document> loader) {
-        ((NewsAsyncTaskLoader) loader).rollbackOnStop();
+        NewsAsyncTaskLoader.rollbackOnStop();
     }
 
 }
