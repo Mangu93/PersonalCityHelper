@@ -1,6 +1,9 @@
 package com.mangu.personalcityhelper.data;
 
 import com.google.gson.JsonObject;
+import com.mangu.personalcityhelper.data.model.bus.LineList;
+import com.mangu.personalcityhelper.data.model.lineschedule.LineSchedule;
+import com.mangu.personalcityhelper.data.remote.BusService;
 import com.mangu.personalcityhelper.data.remote.WeatherService;
 
 import javax.inject.Inject;
@@ -12,9 +15,12 @@ import io.reactivex.Observable;
 public class DataManager {
     private final WeatherService mWeatherService;
 
+    private final BusService mBusService;
+
     @Inject
-    public DataManager(WeatherService weatherService) {
+    public DataManager(WeatherService weatherService, BusService busService) {
         this.mWeatherService = weatherService;
+        this.mBusService = busService;
     }
 
     public Observable<JsonObject> getWeatherForToday() {
@@ -23,5 +29,13 @@ public class DataManager {
 
     public Observable<JsonObject> getForecast() {
         return mWeatherService.getForecast(2511852);
+    }
+
+    public Observable<LineList> getBusLines() {
+        return mBusService.getBusLines("4");
+    }
+
+    public Observable<LineSchedule> getLineSchedule(String day, String line, String month) {
+        return mBusService.getLineSchedule(day, "", "ES", line, month);
     }
 }

@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import static com.mangu.personalcityhelper.util.ViewUtil.processDocumentIntoLayout;
 
 public class EventsPresenter extends BasePresenter<EventsMvpView> {
+    @SuppressWarnings("FieldCanBeLocal")
     private final DataManager mDataManager;
 
     @Inject

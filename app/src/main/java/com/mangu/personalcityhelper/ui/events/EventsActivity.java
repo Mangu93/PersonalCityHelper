@@ -6,6 +6,7 @@ import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.mangu.personalcityhelper.R;
 import com.mangu.personalcityhelper.data.remote.NewsAsyncTaskLoader;
@@ -13,6 +14,7 @@ import com.mangu.personalcityhelper.ui.base.BaseActivity;
 import com.mangu.personalcityhelper.ui.base.ScrollViewListener;
 import com.mangu.personalcityhelper.ui.common.ErrorView;
 import com.mangu.personalcityhelper.ui.common.ScrollViewExt;
+import com.mangu.personalcityhelper.util.NetworkUtil;
 
 import org.jsoup.nodes.Document;
 
@@ -22,9 +24,12 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import timber.log.Timber;
 
 import static com.mangu.personalcityhelper.util.ViewUtil.createErrorSnackbar;
+import static com.mangu.personalcityhelper.util.ViewUtil.generateErrorLayout;
 
+@SuppressWarnings("WeakerAccess")
 public class EventsActivity extends BaseActivity
         implements EventsMvpView, ErrorView.ErrorListener, ScrollViewListener,
         LoaderCallbacks<Document> {
@@ -39,6 +44,8 @@ public class EventsActivity extends BaseActivity
     @BindView(R.id.news_layout)
     LinearLayout mEventsLayout;
     ScrollViewExt mScrollView;
+    private Toast mToast = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +55,15 @@ public class EventsActivity extends BaseActivity
         mScrollView = (ScrollViewExt) findViewById(R.id.scrollView);
         mScrollView.setScrollViewListener(this);
         mErrorView.setErrorListener(this);
-        getSupportLoaderManager().restartLoader(LOADER_ID, null, this);
+        if (NetworkUtil.isNetworkConnected(this)) {
+            getSupportLoaderManager().restartLoader(LOADER_ID, null, this);
+            mToast = Toast.makeText(this, R.string.more_details,
+                    Toast.LENGTH_SHORT);
+            mToast.show();
+        } else {
+            mErrorView.addView(generateErrorLayout(getApplicationContext()).get(0));
+            mErrorView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -78,8 +93,9 @@ public class EventsActivity extends BaseActivity
 
     @Override
     public void showErrorSnackMessage(Throwable errorProduced) {
+        Timber.e(errorProduced);
         if (errorProduced instanceof IOException) {
-            createErrorSnackbar(getApplicationContext(), getLayout()).show();
+            createErrorSnackbar(findViewById(getLayout())).show();
         }
     }
 
@@ -112,6 +128,9 @@ public class EventsActivity extends BaseActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (mToast != null) {
+            mToast.cancel();
+        }
         mEventsPresenter.detachView();
     }
 

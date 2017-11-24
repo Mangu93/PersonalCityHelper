@@ -9,6 +9,7 @@ import retrofit2.http.Query;
 
 import static com.mangu.personalcityhelper.BuildConfig.OpenWeatherApiToken;
 
+@SuppressWarnings("SameParameterValue")
 public interface WeatherService {
 
     @Headers({"appid:" + OpenWeatherApiToken})

@@ -3,9 +3,10 @@
     package="com.mangu.personalcityhelper">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
     <application
         android:name=".StarterApp"
         android:allowBackup="true"
@@ -25,7 +26,8 @@
         <activity android:name=".ui.events.EventsActivity" />
         <activity android:name=".ui.beach.BeachActivity" />
         <activity android:name=".ui.weather.WeatherActivity" />
-        <activity android:name=".ui.transport.TransportActivity"></activity>
+        <activity android:name=".ui.transport.TransportActivity" />
+        <activity android:name=".ui.important.ImportantActivity" />
     </application>
 
 </manifest>

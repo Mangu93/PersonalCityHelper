@@ -6,9 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import rx.Observable;
 
-/**
- * Created by lam on 2/6/17.
- */
+
 public class IoMainScheduler<T> extends BaseScheduler<T>
         implements Observable.Transformer<String, R> {
 

@@ -10,18 +10,20 @@
     <string name="maxTemp">Temperatura máxima</string>
     <string name="afternoon">Tarde</string>
     <string name="thermalSens">Sensación térmica</string>
-    <string name="beaches">Estado de las playas</string>
-    <string name="prediction">Predicción</string>
     <string name="swell">Oleaje</string>
-    <string name="tomorrow">Mañana</string>
     <string name="day">"Día: "</string>
     <string name="sky">Estado del cielo</string>
     <string name="morning">Mañana</string>
     <string name="change_language">Cambiar idioma</string>
     <string name="beach_icon">Beach icon</string>
-    <string name="Pressure">Presión:</string>
     <string name="humidity">"Humedad: "</string>
     <string name="minimum_and_maximum">"Min y max: "</string>
     <string name="temperature">Temperatura:</string>
     <string name="transport">Transportes</string>
+    <string name="error_no_data">Lo sentimos, no hay información sobre esta línea</string>
+    <string name="error_no_connection">Lo siento, hubo un problema con la conexión, intentelo más tarde.</string>
+    <string name="next">"Siguiente bus: "</string>
+    <string name="important_information">Información\nimportante</string>
+    <string name="emergency_pharmacy">"Farmacia de Emergencia: "</string>
+    <string name="more_details">Pulse en un elemento para ver mas detalles</string>
 </resources>

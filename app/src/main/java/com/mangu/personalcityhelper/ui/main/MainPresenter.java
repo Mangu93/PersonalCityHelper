@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 @ConfigPersistent
 public class MainPresenter extends BasePresenter<MainMvpView> {
+    @SuppressWarnings("FieldCanBeLocal")
     private final DataManager mDataManager;
 
     @Inject

@@ -9,9 +9,14 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.text.Html;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,12 +29,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mangu.personalcityhelper.R;
 import com.mangu.personalcityhelper.data.model.BeachPrediction;
 import com.mangu.personalcityhelper.data.model.BeachPredictionUtil;
+import com.mangu.personalcityhelper.data.model.bus.Line;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,6 +54,7 @@ import jp.wasabeef.glide.transformations.CropSquareTransformation;
 import static com.mangu.personalcityhelper.data.model.BeachPredictionUtil.preparePrediction;
 import static com.mangu.personalcityhelper.util.NetworkUtil.extractImgUrl;
 import static com.mangu.personalcityhelper.util.StringUtil.beachStrings;
+import static com.mangu.personalcityhelper.util.StringUtil.formatCapitalized;
 
 public class ViewUtil {
     public static float pxToDp(float px) {
@@ -58,10 +67,17 @@ public class ViewUtil {
         return Math.round(dp * density);
     }
 
+    public static float dipToPixels(Context context, float dipValue) {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dipValue, metrics);
+    }
+
     public static void hideKeyboard(Activity activity) {
         InputMethodManager imm =
                 (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(activity.getWindow().getDecorView().getWindowToken(), 0);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(activity.getWindow().getDecorView().getWindowToken(), 0);
+        }
     }
 
     public static List<LinearLayout> processDocumentIntoLayout(Context context, Document document) {
@@ -78,7 +94,51 @@ public class ViewUtil {
         return layoutList;
     }
 
-    public static LinearLayout prepareLayout(Context context, Element elementNew) {
+    public static List<LinearLayout> generateErrorLayout(Context context) {
+        List<LinearLayout> layoutList = new ArrayList<>();
+        LinearLayout linearLayout = new LinearLayout(context);
+        linearLayout.setLayoutParams(
+                new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT));
+        linearLayout.setPadding(0, 0, 0, dpToPx(10));
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        TextView textView = new TextView(context);
+        textView.setLayoutParams(
+                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
+        textView.setText(context.getText(R.string.error_no_connection));
+        textView.setPadding(dpToPx(5), dpToPx(5), dpToPx(5), dpToPx(5));
+        textView.setTypeface(null, Typeface.BOLD_ITALIC);
+        linearLayout.addView(textView);
+        layoutList.add(linearLayout);
+        return layoutList;
+    }
+
+    public static LinearLayout prepareBusLayout(Context context, Document document) {
+        LinearLayout linearLayout = new LinearLayout(context);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        Elements elements = document.getElementsByClass("WYSIWYG");
+        for (Element newElement : elements.get(0).children()) {
+            Log.i("TAG", newElement.toString());
+        }
+        return linearLayout;
+    }
+
+    public static TextView generateBusLink(Context context,
+                                           Line line, View.OnClickListener listener) {
+        TextView textView = new TextView(context);
+        String text = line.getIdLinea() + ":" + line.getCodigo() + ": "
+                + line.getNombre() + ", via " + line.getModo() + " " +
+                line.getOperadores().replace(",", "");
+        textView.setText(text);
+        textView.setPadding(dpToPx(5), dpToPx(5), dpToPx(5), dpToPx(5));
+        textView.setTypeface(null, Typeface.BOLD_ITALIC);
+        textView.setOnClickListener(listener);
+        return textView;
+    }
+
+    @Nullable
+    private static LinearLayout prepareLayout(Context context, Element elementNew) {
         String headline = elementNew.getAllElements().select(".tr02s").text();
         String linkUrl = "http://www.rincondelavictoria.es/"
                 + elementNew.getAllElements().select(".imagen.row").attr("href");
@@ -91,8 +151,8 @@ public class ViewUtil {
         return createNewsLayout(context, linkUrl, headline, imgUrl);
     }
 
-    public static LinearLayout createNewsLayout(Context context,
-                                                String url, String headline, String imgUrl) {
+    private static LinearLayout createNewsLayout(Context context,
+                                                 String url, String headline, String imgUrl) {
         LinearLayout linearLayout = new LinearLayout(context);
         linearLayout.setLayoutParams(
                 new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
@@ -135,6 +195,13 @@ public class ViewUtil {
                 "Sorry, try again, there was an error with the connection", Snackbar.LENGTH_LONG);
     }
 
+    @NonNull
+    public static Snackbar createErrorSnackbar(View view) {
+        return Snackbar.make(view,
+                "Sorry, try again, there was an error with the connection", Snackbar.LENGTH_LONG);
+    }
+
+
     @SuppressLint("SetJavaScriptEnabled")
     private static PopupWindow generateWebPopup(Context context, String linkUrl) {
         @SuppressLint("InflateParams") View popUpView = ((Activity) context).getLayoutInflater().
@@ -144,6 +211,7 @@ public class ViewUtil {
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         final WebView webView = (WebView) popUpView.findViewById(R.id.webview);
         webView.getSettings().setJavaScriptEnabled(true);
+        //noinspection EmptyMethod
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
@@ -155,6 +223,7 @@ public class ViewUtil {
                         "})()");
             }
 
+            @SuppressWarnings("EmptyMethod")
             @Override
             public WebResourceResponse shouldInterceptRequest(WebView view,
                                                               WebResourceRequest request) {
@@ -217,5 +286,67 @@ public class ViewUtil {
         return view;
     }
 
+    public static LinearLayout createPharmacyLayout(Context context, Document data) {
+        LinearLayout linearLayout = new LinearLayout(context);
+        linearLayout.setLayoutParams(
+                new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT));
+        linearLayout.setPadding(0, 0, 0, dpToPx(10));
+        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+        StringBuilder message = new StringBuilder(data.body().getElementById("marco-aux").getAllElements().get(0).text());
+        message = new StringBuilder(message.toString().replace("RICON", "RINCON"));
+        String[] messageSplitted = message.toString().split("\\s*(?=G)|(?=RINCON)");
+        message = new StringBuilder(context.getString(R.string.emergency_pharmacy));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            message.append(String.join("\n", messageSplitted));
+        } else {
+            for (String msg : messageSplitted) {
+                message.append("\n").append(msg);
+            }
+        }
+        TextView textView = new TextView(context);
+        textView.setLayoutParams(
+                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
+        textView.setText(message.toString());
+        textView.setPadding(dpToPx(5), dpToPx(5), dpToPx(5), dpToPx(5));
+        textView.setTypeface(null, Typeface.BOLD_ITALIC);
+        linearLayout.addView(textView);
+        return linearLayout;
+    }
+
+    public static void createTablePhone(Context context, String[] telephones,
+                                        TableLayout tableLayout, View.OnClickListener listener) {
+        for (String telephone : telephones) {
+            String tlf = telephone.replaceAll("\\s+", "");
+            //The place is in the first position of the splitted string
+            String place = tlf.split("([0-9]+)")[0];
+            //The number is in the second position of this regex
+            String[] splitted = tlf.split("([a-zA-ZÀ-ÿ]+)");
+            String number = "";
+            if (1 <= splitted.length) {
+                number = splitted[1];
+            }
+            TableRow tableRow = new TableRow(context);
+            TextView left = new TextView(context);
+            left.setLayoutParams(new TableRow.LayoutParams(1));
+            left.setText(formatCapitalized(place));
+            left.setGravity(Gravity.END);
+            left.setPadding(0, 0, dpToPx(5), dpToPx(5));
+            if (number.equalsIgnoreCase("")) {
+                left.setTypeface(null, Typeface.BOLD);
+                SpannableString spannableString = new SpannableString(formatCapitalized(place));
+                spannableString.setSpan(new UnderlineSpan(), 0, spannableString.length(), 0);
+                left.setText(spannableString);
+            }
+            TextView right = new TextView(context);
+            right.setText(number);
+            right.setPadding(dpToPx(5), 0, 0, dpToPx(5));
+            right.setOnClickListener(listener);
+            tableRow.addView(left);
+            tableRow.addView(right);
+            tableLayout.addView(tableRow);
+        }
+    }
 
 }

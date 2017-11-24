@@ -6,6 +6,7 @@ import rx.Single;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
+@SuppressWarnings("ALL")
 public class BasePresenter<T extends MvpView> implements Presenter<T> {
 
     private final CompositeSubscription mCompositeSubscription = new CompositeSubscription();

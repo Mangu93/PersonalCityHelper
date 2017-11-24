@@ -13,10 +13,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import static com.mangu.personalcityhelper.util.ViewUtil.generateErrorLayout;
 import static com.mangu.personalcityhelper.util.ViewUtil.processDocumentIntoLayout;
 
 @ConfigPersistent
 public class NewsPresenter extends BasePresenter<NewsMvpView> {
+    @SuppressWarnings("FieldCanBeLocal")
     private final DataManager mDataManager;
 
 
@@ -34,6 +36,14 @@ public class NewsPresenter extends BasePresenter<NewsMvpView> {
         checkViewAttached();
         getMvpView().showProgress(true);
         List<LinearLayout> layoutList = processDocumentIntoLayout(context, document);
+        getMvpView().showProgress(false);
+        getMvpView().showNews(layoutList);
+    }
+
+    void showError(Context context) {
+        checkViewAttached();
+        getMvpView().showProgress(true);
+        List<LinearLayout> layoutList = generateErrorLayout(context);
         getMvpView().showProgress(false);
         getMvpView().showNews(layoutList);
     }

@@ -1,13 +1,17 @@
 package com.mangu.personalcityhelper.util;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.google.gson.JsonObject;
 import com.mangu.personalcityhelper.R;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringUtil {
     static String[] beachStrings(Context context) {
@@ -63,5 +67,99 @@ public class StringUtil {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(time);
         return calendar;
+    }
+
+    @NonNull
+    public static String getCurrentDay() {
+        Calendar cal = Calendar.getInstance();
+        int dayOfTheMonth = cal.get(Calendar.DAY_OF_MONTH);
+        return String.valueOf(dayOfTheMonth);
+    }
+
+    @NonNull
+    private static String getCurrentDayInitial() {
+        Calendar cal = Calendar.getInstance();
+        return cal.getDisplayName(Calendar.DAY_OF_WEEK,
+                Calendar.SHORT, new Locale("es", "ES")).substring(0, 1);
+    }
+
+    @NonNull
+    public static String getCurrentMonth() {
+        Calendar cal = Calendar.getInstance();
+        int month = cal.get(Calendar.MONTH);
+        return String.valueOf(month);
+    }
+
+    @NonNull
+    public static String getCurrentHour() {
+        Calendar cal = Calendar.getInstance();
+        return (cal.get(Calendar.HOUR_OF_DAY) + 2) + ":" + cal.get(Calendar.MINUTE);
+    }
+
+    public static boolean isSimilarHour(String desired, String actual) {
+        int minutesDesired = Integer.parseInt(desired.split(":")[1]);
+        int minutesActual = Integer.parseInt(actual.split(":")[1]);
+        int hourDesired = Integer.parseInt(desired.split(":")[0]);
+        int hourActual = Integer.parseInt(actual.split(":")[0]);
+        return (hourDesired == hourActual) &&
+                (minutesActual < minutesDesired) && ((minutesDesired - minutesActual) < 20);
+    }
+
+    @NonNull
+    public static String formatHourList(List<String> hours) {
+        StringBuilder rtn = new StringBuilder();
+        if (hours.size() == 0) {
+            return "";
+        }
+        for (String h : hours) {
+            rtn.append(h);
+            if (hours.indexOf(h) != hours.size() - 1) {
+                rtn.append(", ");
+            }
+        }
+        return rtn.toString();
+    }
+
+    public static boolean isDayInFrequency(String frequency) {
+        String currentDay = getCurrentDayInitial();
+        if (frequency.equalsIgnoreCase("L-V")) {
+            if (currentDay.equalsIgnoreCase("M") || currentDay.equalsIgnoreCase("J") ||
+                    frequency.toLowerCase().contains(currentDay.toLowerCase())) {
+                return true;
+            }
+        } else if (frequency.equalsIgnoreCase("lslab")) {
+            if (currentDay.equalsIgnoreCase("M") || currentDay.equalsIgnoreCase("J") ||
+                    currentDay.equalsIgnoreCase("S") ||
+                    frequency.toLowerCase().contains(currentDay.toLowerCase())) {
+                return true;
+            }
+        } else if (frequency.equalsIgnoreCase("df")) {
+            if (currentDay.equalsIgnoreCase("d")) {
+                return true;
+            }
+        } else if (frequency.equalsIgnoreCase("slab") && (currentDay.equalsIgnoreCase("s"))) {
+            return true;
+        }
+        //TODO Saturday and Sunday
+        return false;
+    }
+
+    /*
+        Example: HelloWorld -> Hello World
+        HellothereFriend -> Hellothere Friend
+     */
+    @NonNull
+    static String formatCapitalized(String input) {
+        StringBuilder out = new StringBuilder(input);
+        Pattern p = Pattern.compile("[A-Z]");
+        Matcher m = p.matcher(input);
+        int extraFeed = 0;
+        while (m.find()) {
+            if (m.start() != 0) {
+                out = out.insert(m.start() + extraFeed, " ");
+                extraFeed++;
+            }
+        }
+        return out.toString();
     }
 }

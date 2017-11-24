@@ -2,11 +2,10 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
-        android:id="@+id/text_error_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="26dp"
         android:gravity="center_horizontal"
-        android:text="IMPLEMENT"
+        android:text=""
         android:textSize="24sp" />
 </merge>

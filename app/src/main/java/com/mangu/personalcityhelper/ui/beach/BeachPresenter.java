@@ -16,8 +16,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 import static com.mangu.personalcityhelper.util.ViewUtil.generateBeachTextView;
+import static com.mangu.personalcityhelper.util.ViewUtil.generateErrorLayout;
 
 public class BeachPresenter extends BasePresenter<BeachMvpView> {
+    @SuppressWarnings("FieldCanBeLocal")
     private final DataManager mDataManager;
 
 
@@ -40,5 +42,14 @@ public class BeachPresenter extends BasePresenter<BeachMvpView> {
         viewList.add(generateBeachTextView(daysArray.getJSONObject(0), context));
         viewList.add(generateBeachTextView(daysArray.getJSONObject(1), context));
         getMvpView().drawWeather(viewList);
+    }
+
+    void showError(Context context) {
+        checkViewAttached();
+        getMvpView().showProgress(true);
+        List<View> layoutList = new ArrayList<>();
+        layoutList.add(generateErrorLayout(context).get(0));
+        getMvpView().showProgress(false);
+        getMvpView().drawWeather(layoutList);
     }
 }

@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide;
 import com.google.gson.JsonObject;
 import com.mangu.personalcityhelper.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
@@ -22,11 +21,14 @@ import static com.mangu.personalcityhelper.util.StringUtil.formatTimestamp;
 import static com.mangu.personalcityhelper.util.StringUtil.getMinAndMax;
 import static com.mangu.personalcityhelper.util.StringUtil.kelvinToCelsius;
 
+@SuppressWarnings("CanBeFinal")
 public class WeatherCardAdapter extends
         RecyclerView.Adapter<WeatherCardAdapter.ViewHolder> implements View.OnClickListener {
     private static final String BASE_PIC_URL = "http://openweathermap.org/img/w/";
 
     private Context mContext;
+    private List<JsonObject> mJson;
+    private View.OnClickListener mClickListener;
 
     public WeatherCardAdapter(Context context) {
         this.mContext = context;
@@ -40,9 +42,6 @@ public class WeatherCardAdapter extends
         this.mJson = listJson;
         this.notifyDataSetChanged();
     }
-
-    private List<JsonObject> mJson;
-    private View.OnClickListener mClickListener;
 
     public void setOnClickListener(View.OnClickListener listener) {
         this.mClickListener = listener;
@@ -93,6 +92,7 @@ public class WeatherCardAdapter extends
     }
 
 
+    @SuppressWarnings("CanBeFinal")
     class ViewHolder extends RecyclerView.ViewHolder {
         CardView cv;
         TextView mTemperature;

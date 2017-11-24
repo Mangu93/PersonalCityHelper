@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 
 public class ErrorView extends LinearLayout {
 
+    @SuppressWarnings("FieldCanBeLocal")
     private ErrorListener mErrorListener;
 
     public ErrorView(Context context) {
@@ -49,6 +50,7 @@ public class ErrorView extends LinearLayout {
     }
 
     public interface ErrorListener {
+        @SuppressWarnings("EmptyMethod")
         void onReloadData();
     }
 }

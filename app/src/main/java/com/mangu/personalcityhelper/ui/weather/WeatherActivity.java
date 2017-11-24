@@ -15,6 +15,7 @@ import com.mangu.personalcityhelper.data.local.WeatherCardAdapter;
 import com.mangu.personalcityhelper.data.local.WeatherForecastAdapter;
 import com.mangu.personalcityhelper.ui.base.BaseActivity;
 import com.mangu.personalcityhelper.ui.common.ErrorView;
+import com.mangu.personalcityhelper.util.NetworkUtil;
 import com.mangu.personalcityhelper.util.ViewUtil;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ import timber.log.Timber;
 import static com.mangu.personalcityhelper.util.StringUtil.getDay;
 import static com.mangu.personalcityhelper.util.StringUtil.isToday;
 
+@SuppressWarnings("WeakerAccess")
 public class WeatherActivity extends BaseActivity
         implements WeatherMvpView, ErrorView.ErrorListener, View.OnClickListener {
     @Inject
@@ -62,8 +64,12 @@ public class WeatherActivity extends BaseActivity
         mRecyclerForecast.setLayoutManager(layoutForecast);
         mRecyclerForecast.setAdapter(mWeatherForecastAdapter);
         mRecyclerView.setAdapter(mWeatherCardAdapter);
-        mWeatherPresenter.getTodayWeather();
-        mWeatherPresenter.getForecast();
+        if (NetworkUtil.isNetworkConnected(this)) {
+            mWeatherPresenter.getTodayWeather();
+            mWeatherPresenter.getForecast();
+        } else {
+            mWeatherPresenter.showError(this);
+        }
     }
 
     @Override
@@ -73,7 +79,7 @@ public class WeatherActivity extends BaseActivity
 
     @Override
     public void showProgress(boolean show) {
-
+        mProgress.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -109,6 +115,16 @@ public class WeatherActivity extends BaseActivity
             }
         }
         mWeatherForecastAdapter.setJson(jsonList);
+        showProgress(false);
+    }
+
+    @Override
+    public void showError(List<View> viewList) {
+        for (View view : viewList) {
+            mErrorView.addView(view);
+        }
+        showProgress(false);
+        mErrorView.setVisibility(View.VISIBLE);
     }
 
     @Override

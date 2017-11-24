@@ -3,7 +3,6 @@ package com.mangu.personalcityhelper.ui.beach;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -27,6 +26,7 @@ import timber.log.Timber;
 
 import static com.mangu.personalcityhelper.util.ViewUtil.createErrorSnackbar;
 
+@SuppressWarnings("WeakerAccess")
 public class BeachActivity extends BaseActivity implements
         BeachMvpView, ErrorView.ErrorListener, LoaderCallbacks<JSONObject> {
     private static final int LOADER_ID = 202;
@@ -51,6 +51,8 @@ public class BeachActivity extends BaseActivity implements
     private void startDownload() {
         if (NetworkUtil.isNetworkConnected(this)) {
             getSupportLoaderManager().restartLoader(LOADER_ID, null, this);
+        } else {
+            mBeachPresenter.showError(this);
         }
     }
 
@@ -71,7 +73,7 @@ public class BeachActivity extends BaseActivity implements
             createErrorSnackbar(this, getLayout()).show();
             Timber.e(errorProduced);
         } else {
-            Log.e("TAG", "Something something, speedforce ");
+            Timber.e(errorProduced);
         }
     }
 

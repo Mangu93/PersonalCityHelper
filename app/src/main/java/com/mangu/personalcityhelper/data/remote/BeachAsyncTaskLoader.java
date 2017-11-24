@@ -13,16 +13,16 @@ import fr.arnaudguyon.xmltojsonlib.XmlToJson;
 
 import static com.mangu.personalcityhelper.util.NetworkUtil.getURLContent;
 
+@SuppressWarnings("WeakerAccess")
 public class BeachAsyncTaskLoader extends AsyncTaskLoader<JSONObject> {
     private static final String XML_URL = "http://www.aemet.es/xml/playas/play_v2_2908202.xml";
+    @SuppressWarnings("CanBeFinal")
     @Inject
     BeachMvpView mBeachMvpView;
-    private Context mContext;
     private JSONObject mXmlDownloaded;
 
     public BeachAsyncTaskLoader(Context context, BeachMvpView beachMvpView) {
         super(context);
-        this.mContext = context;
         this.mBeachMvpView = beachMvpView;
     }
 

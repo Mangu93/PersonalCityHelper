@@ -11,6 +11,7 @@ import com.squareup.leakcanary.LeakCanary;
 
 import timber.log.Timber;
 
+@SuppressWarnings("ALL")
 public class StarterApp extends MultiDexApplication {
     AppComponent mApplicationComponent;
 

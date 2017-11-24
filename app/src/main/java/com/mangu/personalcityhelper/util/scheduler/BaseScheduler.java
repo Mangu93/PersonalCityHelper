@@ -22,6 +22,7 @@ import io.reactivex.SingleTransformer;
  * Created by lam on 2/6/17.
  */
 
+@SuppressWarnings("ALL")
 public abstract class BaseScheduler<T> implements
         ObservableTransformer<T, T>, SingleTransformer<T, T>, MaybeTransformer<T, T>,
         CompletableTransformer, FlowableTransformer<T, T> {

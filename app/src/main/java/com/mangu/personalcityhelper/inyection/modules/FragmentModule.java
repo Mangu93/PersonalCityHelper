@@ -9,6 +9,7 @@ import com.mangu.personalcityhelper.inyection.ActivityContext;
 import dagger.Module;
 import dagger.Provides;
 
+@SuppressWarnings("CanBeFinal")
 @Module
 public class FragmentModule {
     private Fragment mFragment;

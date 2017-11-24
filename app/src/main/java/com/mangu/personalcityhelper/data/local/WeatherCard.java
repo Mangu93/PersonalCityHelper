@@ -1,5 +1,6 @@
 package com.mangu.personalcityhelper.data.local;
 
+@SuppressWarnings({"WeakerAccess", "CanBeFinal"})
 public class WeatherCard {
     String mTemperature;
     String mPressure;

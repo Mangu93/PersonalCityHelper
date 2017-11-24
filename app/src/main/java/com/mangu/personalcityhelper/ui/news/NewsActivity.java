@@ -6,6 +6,7 @@ import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.mangu.personalcityhelper.R;
 import com.mangu.personalcityhelper.data.remote.NewsAsyncTaskLoader;
@@ -13,6 +14,8 @@ import com.mangu.personalcityhelper.ui.base.BaseActivity;
 import com.mangu.personalcityhelper.ui.base.ScrollViewListener;
 import com.mangu.personalcityhelper.ui.common.ErrorView;
 import com.mangu.personalcityhelper.ui.common.ScrollViewExt;
+import com.mangu.personalcityhelper.util.NetworkUtil;
+import com.mangu.personalcityhelper.util.ViewUtil;
 
 import org.jsoup.nodes.Document;
 
@@ -25,6 +28,7 @@ import butterknife.BindView;
 
 import static com.mangu.personalcityhelper.util.ViewUtil.createErrorSnackbar;
 
+@SuppressWarnings("WeakerAccess")
 public class NewsActivity extends BaseActivity implements
         NewsMvpView, ErrorView.ErrorListener, LoaderCallbacks<Document>, ScrollViewListener {
     private static final int LOADER_ID = 101;
@@ -36,6 +40,7 @@ public class NewsActivity extends BaseActivity implements
     ProgressBar mProgress;
     @BindView(R.id.news_layout)
     LinearLayout mNewsLayout;
+    private Toast mToast = null;
 
     ScrollViewExt mScrollView;
 
@@ -47,8 +52,15 @@ public class NewsActivity extends BaseActivity implements
         mScrollView = (ScrollViewExt) findViewById(R.id.scrollView);
         mScrollView.setScrollViewListener(this);
         mErrorView.setErrorListener(this);
-        getSupportLoaderManager().restartLoader(LOADER_ID, null, this);
-
+        if (NetworkUtil.isNetworkConnected(this)) {
+            getSupportLoaderManager().restartLoader(LOADER_ID, null, this);
+            mToast = Toast.makeText(this, R.string.more_details,
+                    Toast.LENGTH_SHORT);
+            mToast.show();
+        } else {
+            mErrorView.addView(ViewUtil.generateErrorLayout(this).get(0));
+            mErrorView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -60,6 +72,9 @@ public class NewsActivity extends BaseActivity implements
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (mToast != null) {
+            mToast.cancel();
+        }
         getSupportLoaderManager().destroyLoader(LOADER_ID);
         mNewsPresenter.detachView();
     }
@@ -73,7 +88,7 @@ public class NewsActivity extends BaseActivity implements
     @Override
     public void showErrorSnackMessage(Throwable errorProduced) {
         if (errorProduced instanceof IOException) {
-            createErrorSnackbar(getApplicationContext(), getLayout()).show();
+            createErrorSnackbar(this.mNewsLayout).show();
         }
     }
 
@@ -99,7 +114,7 @@ public class NewsActivity extends BaseActivity implements
         if (document != null) {
             mNewsPresenter.showNews(document, this);
         } else {
-            //show error???
+            mNewsPresenter.showError(this);
         }
     }
 

@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 import retrofit2.HttpException;
 import timber.log.Timber;
 
+@SuppressWarnings("SameParameterValue")
 public class NetworkUtil {
     public static boolean isHttpStatusCode(Throwable throwable, int statusCode) {
         return throwable instanceof HttpException
@@ -25,6 +26,7 @@ public class NetworkUtil {
     public static boolean isNetworkConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getApplicationContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }

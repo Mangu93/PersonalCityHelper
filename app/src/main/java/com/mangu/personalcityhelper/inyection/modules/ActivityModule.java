@@ -8,6 +8,7 @@ import com.mangu.personalcityhelper.inyection.ActivityContext;
 import dagger.Module;
 import dagger.Provides;
 
+@SuppressWarnings("ALL")
 @Module
 public class ActivityModule {
     private Activity mActivity;

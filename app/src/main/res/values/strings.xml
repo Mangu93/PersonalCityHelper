@@ -10,18 +10,75 @@
     <string name="maxTemp">Máximum temperature</string>
     <string name="afternoon">Afternoon</string>
     <string name="thermalSens">Thermal sensation</string>
-    <string name="beaches">State of the beaches</string>
-    <string name="prediction">Prediction</string>
     <string name="swell">Swell</string>
-    <string name="tomorrow">Morning</string>
     <string name="day">Day: </string>
     <string name="sky">Sky conditions</string>
     <string name="morning">Morning</string>
     <string name="change_language">Change language</string>
     <string name="beach_icon">Beach icon</string>
     <string name="temperature">Temperature: </string>
-    <string name="Pressure">Pressure: </string>
     <string name="humidity">Humidity: </string>
     <string name="minimum_and_maximum">Min and max: </string>
     <string name="transport">Transport</string>
+    <string name="error_no_data">Sorry, there is no data about this line</string>
+    <string name="error_no_connection">Sorry, there was an error with the connection. Try again later</string>
+    <string name="next">Next bus: </string>
+    <string name="important_information">Important \ninformation</string>
+    <string name="emergency_pharmacy">Emergency Pharmacy: \n</string>
+    <string name="more_details">Press in a element to see more details</string>
+    <string-array name="phones" translatable="false">
+        <item>Teléfonos De Utilidad</item>
+        <item> Ayuntamiento</item>
+        <item> Alcaldía 952 07 50 30</item>
+        <item> Comercio 952 07 50 38</item>
+        <item> Consumo 952 07 50 90</item>
+        <item> Contratación  952 07 50 52</item>
+        <item> Cultura 951 50 10 98</item>
+        <item> Deportes 952 40 30 59</item>
+        <item> Ferias Y Fiestas 951 50 10 92</item>
+        <item> Informática  952 07 50 70</item>
+        <item> Infraestructura 952 07 50 74</item>
+        <item> Intervención 952 07 50 99</item>
+        <item> Juventud  952 00 60 32</item>
+        <item> Juzgado De Paz  952 40 10 04</item>
+        <item> Medio Ambiente 952 07 50 80</item>
+        <item> Padrón 951 50 03 20</item>
+        <item> Patronato Recaudación 951 95 73 45</item>
+        <item> Policía Local 951 21 22 23</item>
+        <item> Políticas Sociales E Igualdad  952 97 82 94</item>
+        <item> Recaudación 951 95 77 34</item>
+        <item> Recursos Humanos 952 07 50 78</item>
+        <item> Registro      952 07 51 74</item>
+        <item> Secretaría    952 07 50 31</item>
+        <item> Servicios Operativos  952 40 27 99</item>
+        <item> Turismo       952 40 77 68</item>
+        <item> Urbanismo     952 07 50 14</item>
+        <item> Vía Pública   952 07 50 73</item>
+        <item>Otras Oficinas</item>
+        <item>Oficina Iu    952 07 51 71</item>
+        <item>Oficina Pa     952 00 47 56</item>
+        <item>Oficina Pp     952 07 51 86</item>
+        <item>Oficina Psoe   952 07 51 87</item>
+        <item>Oficina Ahora Rincon 952 07 51 88</item>
+        <item>Agencias Públicas Administrativas Locales</item>
+        <item>Delphos 952 97 83 30</item>
+        <item>Deportes 952 07 50 85</item>
+        <item>Bibliotecas Municipales Y Otros Edificios</item>
+        <item>Rincón De La Victoria 952 97 82 51</item>
+        <item>La Cala Del Moral 952 40 41 99</item>
+        <item>Benagalbón 952 40 09 33</item>
+        <item>Torre De Benagalbón 952 91 77 88</item>
+        <item>Casa De La Cultura La Cala del Moral 952 97 83 29</item>
+        <item>Casa Fuerte Bezmiliana 952 40 39 23</item>
+        <item>Sala Mare Nostrum 952 40 48 28</item>
+        <item>Museo De Artes Populares 952 40 08 54</item>
+        <item>Radio Victoria FM  952 97 08 00 </item>
+        <item>EMMSA 952 97 12 34</item>
+        <item>EMVIRIA 951 92 15 01</item>
+        <item>Averías 900 555 565 </item>
+        <item>Atención Al Cliente 900 555 566</item>
+        <item>Alumbrado Público 902 702 252</item>
+        <item>Punto Limpio 952 97 12 34</item>
+        <item>Podas 952 97 12 34</item>
+    </string-array>
 </resources>
