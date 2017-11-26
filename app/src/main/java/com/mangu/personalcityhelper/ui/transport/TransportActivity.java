@@ -5,12 +5,17 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mangu.personalcityhelper.R;
+import com.mangu.personalcityhelper.data.local.BusAdapter;
+import com.mangu.personalcityhelper.data.local.BusItem;
 import com.mangu.personalcityhelper.data.model.lineschedule.HorarioIda;
 import com.mangu.personalcityhelper.data.model.lineschedule.Planificadore;
 import com.mangu.personalcityhelper.data.remote.BusAsyncTaskLoader;
@@ -20,6 +25,8 @@ import com.mangu.personalcityhelper.util.NetworkUtil;
 
 import org.jsoup.nodes.Document;
 
+import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +46,7 @@ import static com.mangu.personalcityhelper.util.ViewUtil.generateErrorLayout;
 @SuppressWarnings("WeakerAccess")
 public class TransportActivity extends BaseActivity
         implements TransportMvpView, ErrorView.ErrorListener,
-        LoaderCallbacks<Document>, View.OnClickListener {
+        LoaderCallbacks<Document>, View.OnClickListener, AdapterView.OnItemClickListener {
 
     @Inject
     TransportPresenter mTransportPresenter;
@@ -49,17 +56,25 @@ public class TransportActivity extends BaseActivity
     ProgressBar mProgress;
     @BindView(R.id.relative)
     RelativeLayout mRelativeLayout;
+    ArrayList<BusItem> mBusItems = new ArrayList<>();
+    ListView mListView;
+    BusAdapter mBusAdapter;
+    private Toast mToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mListView = (ListView) findViewById(R.id.listView);
         activityComponent().inject(this);
         mTransportPresenter.attachView(this);
+
         if (NetworkUtil.isNetworkConnected(getApplicationContext())) {
             try {
                 mTransportPresenter.getBusLines(getApplicationContext(), this);
-            }catch (UnknownHostException ex) {
+            }catch (IOException ex) {
                 showErrorSnackMessage(ex);
+                mViewError.addView(generateErrorLayout(getApplicationContext()).get(0));
+                mViewError.setVisibility(View.VISIBLE);
             }
         } else {
             mViewError.addView(generateErrorLayout(getApplicationContext()).get(0));
@@ -80,7 +95,7 @@ public class TransportActivity extends BaseActivity
     @Override
     public void showErrorSnackMessage(Throwable e) {
         Timber.e(e);
-        if (e instanceof UnknownHostException) {
+        if (e instanceof IOException) {
             createErrorSnackbar(this.mRelativeLayout).show();
         }
     }
@@ -127,6 +142,16 @@ public class TransportActivity extends BaseActivity
         showProgress(false);
     }
 
+    @Override
+    public void changeAdapter(ArrayList<BusItem> busItemArrayList) {
+        mBusAdapter = new BusAdapter(this, busItemArrayList);
+        mListView.setAdapter(mBusAdapter);
+        mListView.setOnItemClickListener(this);
+        showProgress(false);
+        mToast = Toast.makeText(this, getString(R.string.more_details), Toast.LENGTH_SHORT);
+        mToast.show();
+    }
+
 
     @Override
     public void onReloadData() {
@@ -157,5 +182,16 @@ public class TransportActivity extends BaseActivity
         String text = ((TextView) view).getText().toString();
         String id = text.split(":")[0];
         mTransportPresenter.getLineSchedule(id);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        if (mToast != null) {
+            mToast.cancel();
+        }
+        TextView textView = (TextView) view.findViewById(R.id.line_id);
+        String line = textView.getText().toString();
+        mTransportPresenter.getLineSchedule(line);
+        showProgress(false);
     }
 }

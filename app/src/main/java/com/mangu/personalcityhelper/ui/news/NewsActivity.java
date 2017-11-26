@@ -54,9 +54,7 @@ public class NewsActivity extends BaseActivity implements
         mErrorView.setErrorListener(this);
         if (NetworkUtil.isNetworkConnected(this)) {
             getSupportLoaderManager().restartLoader(LOADER_ID, null, this);
-            mToast = Toast.makeText(this, R.string.more_details,
-                    Toast.LENGTH_SHORT);
-            mToast.show();
+
         } else {
             mErrorView.addView(ViewUtil.generateErrorLayout(this).get(0));
             mErrorView.setVisibility(View.VISIBLE);
@@ -97,6 +95,9 @@ public class NewsActivity extends BaseActivity implements
         for (LinearLayout layout : layoutList) {
             mNewsLayout.addView(layout);
         }
+        mToast = Toast.makeText(this, R.string.more_details,
+                Toast.LENGTH_SHORT);
+        mToast.show();
     }
 
     @Override

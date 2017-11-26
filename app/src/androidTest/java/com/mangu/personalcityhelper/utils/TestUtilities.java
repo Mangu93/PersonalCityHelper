@@ -47,7 +47,7 @@ public class TestUtilities {
             NoSuchMethodException, InvocationTargetException {
         final ConnectivityManager conman = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        final Class conmanClass = Class.forName(conman.getClass().getName());
+        final Class conmanClass = Class.forName(conman != null ? conman.getClass().getName() : null);
         final Field connectivityManagerField = conmanClass.getDeclaredField("mService");
         connectivityManagerField.setAccessible(true);
         final Object connectivityManager = connectivityManagerField.get(conman);
@@ -64,34 +64,24 @@ public class TestUtilities {
     public static ViewAction clickXY(final int x, final int y){
         return new GeneralClickAction(
                 Tap.SINGLE,
-                new CoordinatesProvider() {
-                    @Override
-                    public float[] calculateCoordinates(View view) {
+                view -> {
 
-                        final int[] screenPos = new int[2];
-                        view.getLocationOnScreen(screenPos);
+                    final int[] screenPos = new int[2];
+                    view.getLocationOnScreen(screenPos);
 
-                        final float screenX = screenPos[0] + x;
-                        final float screenY = screenPos[1] + y;
-                        float[] coordinates = {screenX, screenY};
+                    final float screenX = screenPos[0] + x;
+                    final float screenY = screenPos[1] + y;
 
-                        return coordinates;
-                    }
+                    return new float[]{screenX, screenY};
                 },
                 Press.FINGER);
     }
 
+    @NonNull
     static TestContentObserver getTestContentObserver() {
         return TestContentObserver.getTestContentObserver();
     }
 
-    /**
-     * Students: The test functions for insert and delete use TestContentObserver to test
-     * the ContentObserver callbacks using the PollingCheck class from the Android Compatibility
-     * Test Suite tests.
-     * NOTE: This only tests that the onChange function is called; it DOES NOT test that the
-     * correct Uri is returned.
-     */
     static class TestContentObserver extends ContentObserver {
         final HandlerThread mHT;
         boolean mContentChanged;

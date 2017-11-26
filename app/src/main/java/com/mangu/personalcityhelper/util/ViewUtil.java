@@ -35,6 +35,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mangu.personalcityhelper.R;
+import com.mangu.personalcityhelper.data.local.BusItem;
 import com.mangu.personalcityhelper.data.model.BeachPrediction;
 import com.mangu.personalcityhelper.data.model.BeachPredictionUtil;
 import com.mangu.personalcityhelper.data.model.bus.Line;
@@ -124,17 +125,12 @@ public class ViewUtil {
         return linearLayout;
     }
 
-    public static TextView generateBusLink(Context context,
-                                           Line line, View.OnClickListener listener) {
-        TextView textView = new TextView(context);
-        String text = line.getIdLinea() + ":" + line.getCodigo() + ": "
-                + line.getNombre() + ", via " + line.getModo() + " " +
-                line.getOperadores().replace(",", "");
-        textView.setText(text);
-        textView.setPadding(dpToPx(5), dpToPx(5), dpToPx(5), dpToPx(5));
-        textView.setTypeface(null, Typeface.BOLD_ITALIC);
-        textView.setOnClickListener(listener);
-        return textView;
+
+    @NonNull
+    public static BusItem generateBusItem(Line line) {
+        return new BusItem(line.getCodigo(),
+                line.getNombre() + ", via " + line.getModo() + " " +
+                        line.getOperadores().replace(",", ""), line.getIdLinea());
     }
 
     @Nullable
@@ -166,12 +162,14 @@ public class ViewUtil {
 
         ImageView imageView = new ImageView(context);
         imageView.setLayoutParams(new LinearLayout.LayoutParams(400, 300));
-
+        imageView.setOnClickListener(view ->
+                generateWebPopup(context, url).showAtLocation(view, Gravity.CENTER, 0, 0));
         Glide.with(context)
                 .load(imgUrl)
                 .bitmapTransform(new CropSquareTransformation(context))
                 .placeholder(R.drawable.ic_news)
                 .into(imageView);
+
 
         linearLayout.addView(imageView);
         linearLayout.addView(headlineTextView);

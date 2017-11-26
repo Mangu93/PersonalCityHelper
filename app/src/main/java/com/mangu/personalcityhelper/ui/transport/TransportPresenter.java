@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.mangu.personalcityhelper.data.DataManager;
+import com.mangu.personalcityhelper.data.local.BusItem;
 import com.mangu.personalcityhelper.data.model.bus.Line;
 import com.mangu.personalcityhelper.data.model.bus.LineList;
 import com.mangu.personalcityhelper.data.model.lineschedule.LineSchedule;
@@ -14,7 +15,10 @@ import com.mangu.personalcityhelper.util.scheduler.SchedulerUtils;
 
 import org.jsoup.nodes.Document;
 
+import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -22,8 +26,7 @@ import timber.log.Timber;
 
 import static com.mangu.personalcityhelper.util.StringUtil.getCurrentDay;
 import static com.mangu.personalcityhelper.util.StringUtil.getCurrentMonth;
-import static com.mangu.personalcityhelper.util.ViewUtil.dpToPx;
-import static com.mangu.personalcityhelper.util.ViewUtil.generateBusLink;
+import static com.mangu.personalcityhelper.util.ViewUtil.generateBusItem;
 import static com.mangu.personalcityhelper.util.ViewUtil.prepareBusLayout;
 
 public class TransportPresenter extends BasePresenter<TransportMvpView> {
@@ -45,21 +48,20 @@ public class TransportPresenter extends BasePresenter<TransportMvpView> {
         LinearLayout layout = prepareBusLayout(context, data);
     }
 
-    void getBusLines(Context context, View.OnClickListener listener) throws UnknownHostException{
+    void getBusLines(Context context, View.OnClickListener listener) throws IOException{
         checkViewAttached();
         getMvpView().showProgress(true);
         mDataManager.getBusLines().compose(SchedulerUtils.ioToMain())
-                .subscribe(result -> processBusLines(result, context, listener));
+                .subscribe(result -> processBusAdapter(result, context, listener));
     }
 
-    private void processBusLines(LineList result, Context context, View.OnClickListener listener) {
-        LinearLayout linearLayout = new LinearLayout(context);
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
-        linearLayout.setPadding(dpToPx(5), dpToPx(5), dpToPx(5), dpToPx(5));
-        for (Line line : result.lineas) {
-            linearLayout.addView(generateBusLink(context, line, listener));
+
+    private void processBusAdapter(LineList result, Context context, View.OnClickListener listener) {
+        ArrayList<BusItem> busItemArrayList = new ArrayList<>();
+        for (Line line: result.lineas) {
+            busItemArrayList.add(generateBusItem(line));
         }
-        getMvpView().addBusView(linearLayout);
+        getMvpView().changeAdapter(busItemArrayList);
     }
 
     void getLineSchedule(String line) {

@@ -57,9 +57,7 @@ public class EventsActivity extends BaseActivity
         mErrorView.setErrorListener(this);
         if (NetworkUtil.isNetworkConnected(this)) {
             getSupportLoaderManager().restartLoader(LOADER_ID, null, this);
-            mToast = Toast.makeText(this, R.string.more_details,
-                    Toast.LENGTH_SHORT);
-            mToast.show();
+
         } else {
             mErrorView.addView(generateErrorLayout(getApplicationContext()).get(0));
             mErrorView.setVisibility(View.VISIBLE);
@@ -104,6 +102,9 @@ public class EventsActivity extends BaseActivity
         for (LinearLayout layout : layoutList) {
             mEventsLayout.addView(layout);
         }
+        mToast = Toast.makeText(this, R.string.more_details,
+                Toast.LENGTH_SHORT);
+        mToast.show();
     }
 
     @Override
