@@ -79,8 +79,12 @@ public class NewsActivity extends BaseActivity implements
 
     @Override
     public void showProgress(boolean show) {
-        mErrorView.setVisibility(View.GONE);
-        mProgress.setVisibility(show ? View.VISIBLE : View.GONE);
+        try {
+            mErrorView.setVisibility(View.GONE);
+            mProgress.setVisibility(show ? View.VISIBLE : View.GONE);
+        } catch (Exception exception) {
+            mProgress.setVisibility(show ? View.VISIBLE: View.GONE);
+        }
     }
 
     @Override
