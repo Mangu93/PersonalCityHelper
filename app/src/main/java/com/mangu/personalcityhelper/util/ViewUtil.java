@@ -291,7 +291,8 @@ public class ViewUtil {
                         LinearLayout.LayoutParams.WRAP_CONTENT));
         linearLayout.setPadding(0, 0, 0, dpToPx(10));
         linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-        StringBuilder message = new StringBuilder(data.body().getElementById("marco-aux").getAllElements().get(0).text());
+        StringBuilder message = new StringBuilder(data.body().
+                getElementById("marco-aux").getAllElements().get(0).text());
         message = new StringBuilder(message.toString().replace("RICON", "RINCON"));
         String[] messageSplitted = message.toString().split("\\s*(?=G)|(?=RINCON)");
         message = new StringBuilder(context.getString(R.string.emergency_pharmacy));

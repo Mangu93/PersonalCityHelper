@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Personal City Helper</string>
+    <string name="app_name" translatable="false">Tu Rincon de la Victoria</string>
     <string name="news">News</string>
     <string name="beach">Beach</string>
     <string name="weather">Weather</string>
@@ -81,4 +81,11 @@
         <item>Punto Limpio 952 97 12 34</item>
         <item>Podas 952 97 12 34</item>
     </string-array>
+    <string name="title_activity_places">Interesting places</string>
+    <string name="here">You are here</string>
+    <string name="last_known_location">Last known location</string>
+    <string name="all">All</string>
+    <string name="restaurant">Restaurants</string>
+    <string name="bar">Bars</string>
+    <string name="interesting">Interesting places</string>
 </resources>

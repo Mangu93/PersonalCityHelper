@@ -26,8 +26,6 @@ import com.mangu.personalcityhelper.util.NetworkUtil;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
-import java.net.SocketTimeoutException;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +69,7 @@ public class TransportActivity extends BaseActivity
         if (NetworkUtil.isNetworkConnected(getApplicationContext())) {
             try {
                 mTransportPresenter.getBusLines(getApplicationContext(), this);
-            }catch (IOException ex) {
+            } catch (IOException ex) {
                 showErrorSnackMessage(ex);
                 mViewError.addView(generateErrorLayout(getApplicationContext()).get(0));
                 mViewError.setVisibility(View.VISIBLE);

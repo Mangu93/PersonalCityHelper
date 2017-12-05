@@ -26,4 +26,11 @@
     <string name="important_information">Información\nimportante</string>
     <string name="emergency_pharmacy">"Farmacia de Emergencia: "</string>
     <string name="more_details">Pulse en un elemento para ver mas detalles</string>
+    <string name="here">Usted está aquí</string>
+    <string name="last_known_location">Ultima localización disponible</string>
+    <string name="title_activity_places">Sitios interesantes</string>
+    <string name="restaurant">Restaurantes</string>
+    <string name="bar">Bares</string>
+    <string name="all">Todo</string>
+    <string name="interesting">Sitios interesantes</string>
 </resources>

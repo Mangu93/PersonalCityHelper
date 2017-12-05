@@ -24,11 +24,9 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.annotation.NonNull;
 import android.support.test.espresso.ViewAction;
-import android.support.test.espresso.action.CoordinatesProvider;
 import android.support.test.espresso.action.GeneralClickAction;
 import android.support.test.espresso.action.Press;
 import android.support.test.espresso.action.Tap;
-import android.view.View;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -47,11 +45,12 @@ public class TestUtilities {
             NoSuchMethodException, InvocationTargetException {
         final ConnectivityManager conman = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        final Class conmanClass = Class.forName(conman != null ? conman.getClass().getName() : null);
+        final Class conmanClass =
+                Class.forName(conman != null ? conman.getClass().getName() : null);
         final Field connectivityManagerField = conmanClass.getDeclaredField("mService");
         connectivityManagerField.setAccessible(true);
         final Object connectivityManager = connectivityManagerField.get(conman);
-        final Class connectivityManagerClass =  Class.forName(
+        final Class connectivityManagerClass = Class.forName(
                 connectivityManager.getClass().getName());
         final Method setMobileDataEnabledMethod = connectivityManagerClass.
                 getDeclaredMethod("setMobileDataEnabled", Boolean.TYPE);
@@ -61,7 +60,7 @@ public class TestUtilities {
     }
 
     @NonNull
-    public static ViewAction clickXY(final int x, final int y){
+    public static ViewAction clickXY(final int x, final int y) {
         return new GeneralClickAction(
                 Tap.SINGLE,
                 view -> {

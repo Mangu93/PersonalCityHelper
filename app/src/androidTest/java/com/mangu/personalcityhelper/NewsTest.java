@@ -74,6 +74,7 @@ public class NewsTest {
                 .perform(click());
         assertTrue(elapsedTime(mStartTime, SystemClock.elapsedRealtime()));
     }
+
     @Test
     public void testEventsAreVisible() {
         onView(withId(R.id.id_events))

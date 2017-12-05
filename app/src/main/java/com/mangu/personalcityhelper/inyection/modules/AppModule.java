@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.mangu.personalcityhelper.data.remote.BusService;
 import com.mangu.personalcityhelper.data.remote.BusServiceFactory;
+import com.mangu.personalcityhelper.data.remote.PlacesService;
+import com.mangu.personalcityhelper.data.remote.PlacesServiceFactory;
 import com.mangu.personalcityhelper.data.remote.WeatherService;
 import com.mangu.personalcityhelper.data.remote.WeatherServiceFactory;
 import com.mangu.personalcityhelper.inyection.AppContext;
@@ -27,7 +29,11 @@ public class AppModule {
     static WeatherService provideStarterService() {
         return WeatherServiceFactory.makeStarterService();
     }
-
+    @Provides
+    @Singleton
+    static PlacesService providePlacesService() {
+        return PlacesServiceFactory.makeStarterService();
+    }
     @Provides
     @Singleton
     static BusService provideBusService() {

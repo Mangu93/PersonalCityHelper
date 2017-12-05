@@ -16,8 +16,6 @@ import com.mangu.personalcityhelper.util.scheduler.SchedulerUtils;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
-import java.net.SocketTimeoutException;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 import javax.inject.Inject;
@@ -48,7 +46,7 @@ public class TransportPresenter extends BasePresenter<TransportMvpView> {
         LinearLayout layout = prepareBusLayout(context, data);
     }
 
-    void getBusLines(Context context, View.OnClickListener listener) throws IOException{
+    void getBusLines(Context context, View.OnClickListener listener) throws IOException {
         checkViewAttached();
         getMvpView().showProgress(true);
         mDataManager.getBusLines().compose(SchedulerUtils.ioToMain())
@@ -56,7 +54,8 @@ public class TransportPresenter extends BasePresenter<TransportMvpView> {
     }
 
 
-    private void processBusAdapter(LineList result, Context context, View.OnClickListener listener) {
+    private void processBusAdapter(LineList result, Context context,
+                                   View.OnClickListener listener) {
         ArrayList<BusItem> busItemArrayList = new ArrayList<>();
         for (Line line: result.lineas) {
             busItemArrayList.add(generateBusItem(line));

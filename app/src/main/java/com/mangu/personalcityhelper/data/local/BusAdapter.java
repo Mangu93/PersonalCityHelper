@@ -50,7 +50,7 @@ public class BusAdapter extends BaseAdapter {
             v = li.inflate(R.layout.view_bus, null);
         }
         BusItem item = mList.get(i);
-        TextView tvLine = (TextView)v.findViewById(R.id.tv_line);
+        TextView tvLine = (TextView) v.findViewById(R.id.tv_line);
         tvLine.setText(item.getmLine());
         TextView tvLineName = (TextView) v.findViewById(R.id.tv_line_name);
         tvLineName.setText(item.getmLineInfo());

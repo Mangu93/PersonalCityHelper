@@ -17,6 +17,7 @@ import com.mangu.personalcityhelper.ui.common.ErrorView;
 import com.mangu.personalcityhelper.ui.events.EventsActivity;
 import com.mangu.personalcityhelper.ui.important.ImportantActivity;
 import com.mangu.personalcityhelper.ui.news.NewsActivity;
+import com.mangu.personalcityhelper.ui.places.PlacesActivity;
 import com.mangu.personalcityhelper.ui.transport.TransportActivity;
 import com.mangu.personalcityhelper.ui.weather.WeatherActivity;
 
@@ -72,7 +73,8 @@ public class MainActivity extends BaseActivity implements MainMvpView, ErrorView
 
     @OnClick({R.id.id_beach, R.id.id_news, R.id.id_weather, R.id.id_events, R.id.id_transport,
             R.id.textViewBeach, R.id.textViewCalendar, R.id.textViewNews, R.id.textViewTransport,
-            R.id.textViewWeather, R.id.id_important, R.id.textViewImportant})
+            R.id.textViewWeather, R.id.id_important, R.id.textViewImportant, R.id.tv_places,
+            R.id.id_places})
     public void onClickTarget(View view) {
         switch (view.getId()) {
 
@@ -99,6 +101,10 @@ public class MainActivity extends BaseActivity implements MainMvpView, ErrorView
             case R.id.id_important:
             case R.id.textViewImportant:
                 startActivity(new Intent(this, ImportantActivity.class));
+                break;
+            case R.id.tv_places:
+            case R.id.id_places:
+                startActivity(new Intent(this, PlacesActivity.class));
                 break;
             default:
                 Timber.e("Unexpected view received", view);

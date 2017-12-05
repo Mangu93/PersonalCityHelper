@@ -8,6 +8,7 @@ import com.mangu.personalcityhelper.ui.events.EventsActivity;
 import com.mangu.personalcityhelper.ui.important.ImportantActivity;
 import com.mangu.personalcityhelper.ui.main.MainActivity;
 import com.mangu.personalcityhelper.ui.news.NewsActivity;
+import com.mangu.personalcityhelper.ui.places.PlacesActivity;
 import com.mangu.personalcityhelper.ui.transport.TransportActivity;
 import com.mangu.personalcityhelper.ui.weather.WeatherActivity;
 
@@ -31,5 +32,7 @@ public interface ActivityComponent {
     void inject(TransportActivity transportActivity);
 
     void inject(ImportantActivity importantActivity);
+
+    void inject(PlacesActivity placesActivity);
 }
 

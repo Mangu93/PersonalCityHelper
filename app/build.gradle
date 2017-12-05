@@ -35,9 +35,12 @@ android {
         buildConfigField("String", "API_TEST",
                 "\"${ApiUrl}\"")
         buildConfigField("String", "OpenWeatherApiToken", OpenWeatherApiToken)
+        buildConfigField("String", "MapsAPIToken", MapsAPIToken)
+        buildConfigField("String", "PlacesApiToken", PlacesApiToken)
         multiDexEnabled true
-
+        resValue "string", "maps", MapsAPIToken
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -58,6 +61,9 @@ configurations.all {
 
 apply from: 'dependencies.gradle'
 dependencies {
+    implementation 'com.google.android.gms:play-services-maps:11.6.2'
+    compile 'com.google.android.gms:play-services-places:11.6.2'
+    //implementation 'com.android.support:appcompat-v7:26.1.0'
     compile supportLibs
     compile networkLibs
     compile rxJavaLibs

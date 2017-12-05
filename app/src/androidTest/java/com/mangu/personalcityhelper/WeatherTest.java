@@ -46,6 +46,7 @@ public class WeatherTest {
     public void setUp() throws Exception {
         mStartTime = SystemClock.elapsedRealtime();
     }
+
     @Before
     public void beforeTest() {
         Intents.init();

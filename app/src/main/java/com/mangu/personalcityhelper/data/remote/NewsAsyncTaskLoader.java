@@ -65,9 +65,10 @@ public class NewsAsyncTaskLoader extends AsyncTaskLoader<Document> {
         try {
             String newsUrl = mBaseNewsUrl + mCount;
             Document document = Jsoup.connect(newsUrl)
-                    .userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:21.0) Gecko/20100101 Firefox/21.0")
+                    .userAgent("Mozilla/5.0 (Windows NT 6.1; " +
+                            "WOW64; rv:21.0) Gecko/20100101 Firefox/21.0")
                     .header("Accept-Language", "en")
-                    .header("Accept-Encoding","gzip,deflate,sdch")
+                    .header("Accept-Encoding", "gzip,deflate,sdch")
                     .get();
             mCount = mCount + 1;
             return document;

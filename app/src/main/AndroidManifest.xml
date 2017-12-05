@@ -3,10 +3,12 @@
     package="com.mangu.personalcityhelper">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
     <application
         android:name=".StarterApp"
         android:allowBackup="true"
@@ -28,6 +30,12 @@
         <activity android:name=".ui.weather.WeatherActivity" />
         <activity android:name=".ui.transport.TransportActivity" />
         <activity android:name=".ui.important.ImportantActivity" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/maps" />
+        <activity
+            android:name=".ui.places.PlacesActivity"
+            android:label="@string/title_activity_places"/>
     </application>
 
 </manifest>
