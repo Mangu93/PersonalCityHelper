@@ -51,4 +51,12 @@ public class DataManager {
     public Observable<JsonObject> getBars(String latWithLng) {
         return mPlacesService.getPlaces(latWithLng, "bar", "1000");
     }
+
+    public Observable<JsonObject> getCafe(String latLng) {
+        return mPlacesService.getPlaces(latLng, "cafe", "1000");
+    }
+
+    public Observable<JsonObject> getTakeaway(String latLng) {
+        return mPlacesService.getPlaces(latLng, "meal_takeaway", "1000");
+    }
 }

@@ -38,6 +38,7 @@ import com.mangu.personalcityhelper.util.ViewUtil;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -99,13 +100,14 @@ public class PlacesActivity extends BaseActivity implements OnMapReadyCallback, 
         mOptionsFilter = new ArrayList<>();
         mOptionsFilter.add(0, getString(R.string.restaurant));
         mOptionsFilter.add(1, getString(R.string.bar));
+        mOptionsFilter.add(2, getString(R.string.cafe));
+        mOptionsFilter.add(3, getString(R.string.takeaway));
         mOptionsFilter.add(getString(R.string.all));
         mFinalPositionFilter = mOptionsFilter.indexOf(getString(R.string.all));
     }
 
 
     private void getLocation() {
-//         else {
         if (ActivityCompat.checkSelfPermission(
                 this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
@@ -127,14 +129,12 @@ public class PlacesActivity extends BaseActivity implements OnMapReadyCallback, 
                 List<String> providers = mLocationManager.getProviders(true);
                 Location bestLocation = null;
                 for (String provider : providers) {
-
                     Location locationToCheck = mLocationManager.getLastKnownLocation(provider);
                     if (locationToCheck == null) continue;
                     if (bestLocation == null ||
                             locationToCheck.getAccuracy() > bestLocation.getAccuracy()) {
                         bestLocation = locationToCheck;
                     }
-
                 }
                 if (bestLocation == null) {
                     Criteria criteria = new Criteria();
@@ -293,6 +293,8 @@ public class PlacesActivity extends BaseActivity implements OnMapReadyCallback, 
         List<String> listOptions = new ArrayList<>();
         listOptions.add(getString(R.string.restaurant));
         listOptions.add(getString(R.string.bar));
+        listOptions.add(getString(R.string.cafe));
+        listOptions.add(getString(R.string.takeaway));
         listOptions.add(getString(R.string.all));
         RadioGroup radioGroup = (RadioGroup) mDialog.findViewById(R.id.radio_group);
         for (String option : listOptions) {

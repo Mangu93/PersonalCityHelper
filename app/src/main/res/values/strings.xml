@@ -88,4 +88,7 @@
     <string name="restaurant">Restaurants</string>
     <string name="bar">Bars</string>
     <string name="interesting">Interesting places</string>
+    <string name="filter">Filters</string>
+    <string name="cafe">Coffee shop</string>
+    <string name="takeaway">Takeaway</string>
 </resources>

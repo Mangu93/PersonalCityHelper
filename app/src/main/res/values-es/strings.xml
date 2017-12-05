@@ -33,4 +33,7 @@
     <string name="bar">Bares</string>
     <string name="all">Todo</string>
     <string name="interesting">Sitios interesantes</string>
+    <string name="filter">Filtros</string>
+    <string name="cafe">Cafetería</string>
+    <string name="takeaway">Comida para llevar</string>
 </resources>

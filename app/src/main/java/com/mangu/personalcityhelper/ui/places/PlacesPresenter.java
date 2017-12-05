@@ -76,21 +76,24 @@ public class PlacesPresenter extends BasePresenter<PlacesMvpView> {
                 Double.toString(latLng.longitude);
         Observable<JsonObject> mRestaurants = mDataManager.getRestaurants(latWithLng);
         Observable<JsonObject> mBar = mDataManager.getBars(latWithLng);
-
+        Observable<JsonObject> mCafe = mDataManager.getCafe(latWithLng);
+        Observable<JsonObject> mTakeaway = mDataManager.getTakeaway(latWithLng);
         Observable.zip(mRestaurants, mBar, PlacesUtil::joinPlaces).
                 compose(SchedulerUtils.ioToMain()).subscribe(this::processResult);
+        Observable.zip(mCafe, mTakeaway, PlacesUtil::joinPlaces)
+                .compose(SchedulerUtils.ioToMain()).subscribe(this::processResult);
 
         getMvpView().showProgress(false);
     }
 
 
     private void processResult(List<Place> places) {
+        GoogleMap mMap = getMvpView().getMap();
         for (Place place : places) {
-            getMvpView().getMap().
-                    addMarker(new MarkerOptions().
-                            title(place.getmName()).
-                            snippet(place.getmSnippet()).
-                            position(new LatLng(place.getmLatitude(), place.getmLongitude())));
+            mMap.addMarker(new MarkerOptions().
+                    title(place.getmName()).
+                    snippet(place.getmSnippet()).
+                    position(new LatLng(place.getmLatitude(), place.getmLongitude())));
         }
         getMvpView().setListPlaces(places);
     }

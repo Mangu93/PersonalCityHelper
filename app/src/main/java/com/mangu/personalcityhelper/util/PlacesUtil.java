@@ -31,6 +31,9 @@ public class PlacesUtil {
         return placeList;
     }
 
+    /**
+     * TODO Input here the type of places you use in the API request.
+     */
     @NonNull
     private static Integer getTypeOfPlace(String type) {
         switch (type.replace("\"", "")) {
@@ -38,7 +41,10 @@ public class PlacesUtil {
                 return 0;
             case "bar":
                 return 1;
-
+            case "cafe":
+                return 2;
+            case "meal_delivery":
+                return 3;
             default:
                 return -1;
         }
