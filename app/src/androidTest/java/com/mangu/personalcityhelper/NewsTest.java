@@ -35,15 +35,15 @@ public class NewsTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mMainActivity =
-            new ActivityTestRule<>(MainActivity.class);
+            new ActivityTestRule<>(MainActivity.class, true, true);
 
     @Rule
     public ActivityTestRule<NewsActivity> mNewsActivity =
-            new ActivityTestRule<>(NewsActivity.class);
+            new ActivityTestRule<>(NewsActivity.class, true, false);
 
     @Rule
     public ActivityTestRule<EventsActivity> mEventsActivity =
-            new ActivityTestRule<>(EventsActivity.class);
+            new ActivityTestRule<>(EventsActivity.class, true, false);
 
     private long mStartTime = 0L;
 

@@ -91,9 +91,7 @@ public class MainTest {
                 .check(matches(isDisplayed()))
                 .check(matches(isClickable()))
                 .perform(click());
-        onView(withText("Change"))
-                .check(matches(isDisplayed()));
-        onView(withId(android.R.id.button1)).perform(click());
+        onView(withId(android.R.id.button1)).check(matches(isDisplayed())).perform(click());
         assertTrue(elapsedTime(mStartTime, SystemClock.elapsedRealtime()));
 
     }

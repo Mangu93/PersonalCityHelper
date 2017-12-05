@@ -34,10 +34,10 @@ public class TransportTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mMainActivity =
-            new ActivityTestRule<>(MainActivity.class);
+            new ActivityTestRule<>(MainActivity.class, true, true);
     @Rule
     public ActivityTestRule<TransportActivity> mTransportActivity =
-            new ActivityTestRule<>(TransportActivity.class);
+            new ActivityTestRule<>(TransportActivity.class, true, false);
     private long mStartTime = 0L;
 
     @Before
