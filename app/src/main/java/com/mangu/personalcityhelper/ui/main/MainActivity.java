@@ -20,6 +20,7 @@ import com.mangu.personalcityhelper.ui.news.NewsActivity;
 import com.mangu.personalcityhelper.ui.places.PlacesActivity;
 import com.mangu.personalcityhelper.ui.transport.TransportActivity;
 import com.mangu.personalcityhelper.ui.weather.WeatherActivity;
+import com.mangu.personalcityhelper.util.SyncUtils;
 
 import java.util.Locale;
 
@@ -45,6 +46,7 @@ public class MainActivity extends BaseActivity implements MainMvpView, ErrorView
         super.onCreate(savedInstanceState);
         activityComponent().inject(this);
         mMainPresenter.attachView(this);
+        //SyncUtils.initialize(this);
         mErrorView.setErrorListener(this);
 
     }
