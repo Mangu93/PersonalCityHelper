@@ -32,8 +32,8 @@
         <activity android:name=".ui.transport.TransportActivity" />
         <activity android:name=".ui.important.ImportantActivity" />
         <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/maps" />
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCYPsYO3wSP-Z_3SFvvUlShSOQbKL-1ENI" />
         <activity
             android:name=".ui.places.PlacesActivity"
             android:label="@string/title_activity_places"/>

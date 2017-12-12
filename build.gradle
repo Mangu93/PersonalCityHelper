@@ -13,7 +13,6 @@ buildscript {
         classpath 'com.google.gms:google-services:3.0.0'
     }
 
-    configurations.classpath.exclude group: 'com.android.tools.external.lombok'
 }
 
 allprojects {

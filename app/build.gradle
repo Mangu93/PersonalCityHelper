@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 apply from: '../config/quality/quality.gradle'
 android {
+    signingConfigs {
+        config {
+            keyAlias 'final vmi key'
+            keyPassword '7147d1e3115400589dc0c41da410f4d8'
+            storeFile file('C:/Users/adria/Documents/finalvmikey.jks')
+            storePassword '6f589ca9ee46f1d5adffbc0bc3e1eddc'
+        }
+    }
     if (project.hasProperty('devBuild')) {
         aaptOptions.cruncherEnabled = false
     }
@@ -10,13 +18,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
     dexOptions {
         maxProcessCount 4
         preDexLibraries false
         javaMaxHeapSize "8g"
     }
-
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
         exclude 'LICENSE.txt'
@@ -35,19 +41,15 @@ android {
         buildConfigField("String", "API_TEST",
                 "\"${ApiUrl}\"")
         buildConfigField("String", "OpenWeatherApiToken", OpenWeatherApiToken)
-        buildConfigField("String", "MapsAPIToken", MapsAPIToken)
         buildConfigField("String", "PlacesApiToken", PlacesApiToken)
         multiDexEnabled true
-        resValue "string", "maps", MapsAPIToken
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        buildTypes.each {
-            it.buildConfigField 'String', 'PLACES_API_KEY', PlacesApiToken
+            debuggable false
+            signingConfig signingConfigs.config
         }
     }
 }
@@ -67,12 +69,11 @@ dependencies {
     compile supportLibs
     compile networkLibs
     compile rxJavaLibs
-
     //Butterknife Dependencies
     compile "com.jakewharton:butterknife:$versions.butterKnife"
     annotationProcessor "com.jakewharton:butterknife-compiler:$versions.butterKnife"
     // If you want to use the GPU Filters
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile unitTestLibs
     androidTestCompile androidTestsLibs
     compile "com.google.dagger:dagger:$versions.dagger"

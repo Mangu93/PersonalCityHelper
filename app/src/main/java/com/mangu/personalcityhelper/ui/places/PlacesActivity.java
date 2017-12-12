@@ -208,7 +208,14 @@ public class PlacesActivity extends BaseActivity implements OnMapReadyCallback, 
         mMap.setOnMarkerClickListener(this);
         if (NetworkUtil.isNetworkConnected(this)) {
             getLocation();
-            mPlacesPresenter.getSurroundingPlaces(mMarkerList.get(0).getPosition());
+            try {
+                mPlacesPresenter.getSurroundingPlaces(mMarkerList.get(0).getPosition());
+            }catch (IndexOutOfBoundsException ex) {
+                LatLng latLng = new LatLng(36.71607d, -4.28753491d);
+                moveTo(latLng);
+                getLocation();
+                mPlacesPresenter.getSurroundingPlaces(mMarkerList.get(0).getPosition());
+            }
         } else {
             mErrorView.addView(ViewUtil.generateErrorLayout(this).get(0));
             mErrorView.setVisibility(View.VISIBLE);
