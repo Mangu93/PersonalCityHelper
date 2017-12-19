@@ -91,4 +91,5 @@
     <string name="filter">Filters</string>
     <string name="cafe">Coffee shop</string>
     <string name="takeaway">Takeaway</string>
+    <string name="check_weather">Check the weather today</string>
 </resources>

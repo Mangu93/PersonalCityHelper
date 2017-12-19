@@ -46,7 +46,7 @@ public class MainActivity extends BaseActivity implements MainMvpView, ErrorView
         super.onCreate(savedInstanceState);
         activityComponent().inject(this);
         mMainPresenter.attachView(this);
-        //SyncUtils.initialize(this);
+        SyncUtils.initialize(this);
         mErrorView.setErrorListener(this);
 
     }

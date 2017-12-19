@@ -1,14 +1,7 @@
 apply plugin: 'com.android.application'
 apply from: '../config/quality/quality.gradle'
 android {
-    signingConfigs {
-        config {
-            keyAlias 'final vmi key'
-            keyPassword '7147d1e3115400589dc0c41da410f4d8'
-            storeFile file('C:/Users/adria/Documents/finalvmikey.jks')
-            storePassword '6f589ca9ee46f1d5adffbc0bc3e1eddc'
-        }
-    }
+
     if (project.hasProperty('devBuild')) {
         aaptOptions.cruncherEnabled = false
     }
@@ -35,8 +28,8 @@ android {
         applicationId "com.mangu.personalcityhelper"
         minSdkVersion 17
         targetSdkVersion 26
-        versionCode 4
-        versionName "2.0"
+        versionCode 5
+        versionName "3.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "API_TEST",
                 "\"${ApiUrl}\"")
@@ -49,7 +42,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable false
-            signingConfig signingConfigs.config
         }
     }
 }

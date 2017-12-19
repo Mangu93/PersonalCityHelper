@@ -36,4 +36,5 @@
     <string name="filter">Filtros</string>
     <string name="cafe">Cafetería</string>
     <string name="takeaway">Comida para llevar</string>
+    <string name="check_weather">Comprueba el clima de hoy</string>
 </resources>
